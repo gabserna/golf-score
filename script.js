@@ -9,7 +9,7 @@ function getAvailableCourses() {
 const lists = {
  1: {name: 'Shopping list'},
  2: {name: 'Honey do list'},
- ...
+ 3: {name: 'do list'},
 }
 
 
