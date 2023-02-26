@@ -1,4 +1,19 @@
-body {
-  background-color: #000000;
-  color: #fff;
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&family=Roboto:ital,wght@0,300;0,500;1,900&display=swap");
+/* body {
+    background-color: #000000;
+    color: #fff;
+    font-family: 'Heebo', sans-serif;
+}
+
+.container {
+    width: 50%;
+    height: 500px;
+    margin: 0 auto;
+    padding: 0;
+    border: 2px solid #fff;
+    border-radius: 20px;
+} */
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
 }/*# sourceMappingURL=style.css.map */
