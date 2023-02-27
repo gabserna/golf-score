@@ -10,26 +10,16 @@
     <title>Golf Score App</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Golf Score App</h1>
+    <div class="main">
         
-        <!-- <div class="form-group">
+        <div class="form-group">
             <label for="course-select">Select Course</label>
             <select class="form-control" id="course-select"></select>
         </div>
-
----------------------REVISAR-------------
-https://www.w3schools.com/js/tryit.asp?filename=tryjson_html_table_dynamic
-
-<select id="myselect" onchange="change_myselect(this.value)">
-  <option value="">Choose an option:</option>
-  <option value="customers">Customers</option>
-  <option value="products">Products</option>
-  <option value="suppliers">Suppliers</option>
-</select>
-
-
-
+        
+        
+        <!--
+        
         <div class="row">
             <div class="col-lg-12" id="header"></div>
         </div>
@@ -38,24 +28,11 @@ https://www.w3schools.com/js/tryit.asp?filename=tryjson_html_table_dynamic
                 <div id="options-container"></div>
             </div>
         </div> -->
- 
+        
         <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
+            <h1>Golf Score App</h1>
             <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>      <!-- INYECTAR POR JS ???  -->
-                        <th>Hole</th>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                        <th>4</th>
-                        <th>5</th>
-                        <th>6</th>
-                        <th>7</th>
-                        <th>8</th>
-                        <th>9</th>
-                        <th>Out</th>
-                    </tr>      <!-- INYECTAR POR JS ???  -->
-                  </thead>
+            <thead id="table-header"></thead>
               <tbody id="data"></tbody>
             </table>
         </div>

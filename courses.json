@@ -1,0 +1,25 @@
+{
+    "data": {
+      "Course": [
+        {
+          "courseId": 11819,
+          "Name": "Thanksgiving Point Golf Course",
+          "Location": "Lehi, UT",
+          "url": "http://uxcobra.com/golfapi/course11819.txt"
+        },
+        {
+          "courseId": 18300,
+          "Name": "Fox Hollow Golf Course",
+          "Location": "American Fork, UT",
+          "url": "http://uxcobra.com/golfapi/course18300.txt"
+        },
+        {
+          "courseId": 19002,
+          "Name": "Spanish Oaks Golf Course",
+          "Location": "Spanish Fork, UT",
+          "url": "http://uxcobra.com/golfapi/course19002.txt"
+        }
+      ]
+    }
+}
+  

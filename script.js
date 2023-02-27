@@ -1,5 +1,25 @@
+/* fetch('courses.json')
+  .then(response => response.json())
+  .then(data => {
+    var courses = data.data.Course;
+    var courseOptionsHtml = '';
+    courses.forEach((course) => {
+      courseOptionsHtml += `<option value="${course.courseId}">${course.Name}</option>`;
+    });
+    if (courseOptionsHtml) {
+      document.getElementById('course-select').innerHTML = courseOptionsHtml;
+    }
+    console.log(data);
+})
+.catch(error => console.log(error)); */
+
+
+
 // inyectar por js desde html lineas 45-57   ?????
 // par, hcp  falta
+
+
+
 
 
 let url = 'http://uxcobra.com/golfapi/course11819.txt';
@@ -7,6 +27,8 @@ fetch(url)
   .then(response => response.json())
   .then(data => mostrarData(data))
   .catch(error => console.log(error))
+
+  console.log(data)
 
 const mostrarData = (data) => {
   let body = "";
@@ -17,6 +39,7 @@ const mostrarData = (data) => {
     sum += data.data.holes[i].changeLocations.reduce((total, location) => total + location.yards, 0);
   }  
   body += `<td>${sum}</td>`;
+  document.getElementById('table-header').innerHTML = `<tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
   document.getElementById('data').innerHTML = "<tr><th>Yards</th>" + body + "</tr>";
 }
 
@@ -29,8 +52,8 @@ const mostrarData = (data) => {
 
 
 function getAvailableCourses() {
- return fetch('https://golf-courses-api.herokuapp.com/courses/').then(
-   function (response) {
+ return fetch('https://golf-courses-api.herokuapp.com/courses/')
+ .then(function (response) {
      return response.json();
    }
  );
@@ -44,11 +67,6 @@ const lists = {
 
 
 
-let courseOptionsHtml = '';
-courses.forEach((course) => {
-courseOptionsHtml += `<option value="${course.id}">${course.name}</option>`;
-});
-document.getElementById('course-select').innerHTML = courseOptionsHtml;
 
 
 
@@ -56,9 +74,7 @@ document.getElementById('course-select').innerHTML = courseOptionsHtml;
 
 let teeBoxSelectHtml = ''
 teeBoxes.forEach(function (teeBox, index) {
-   teeBoxSelectHtml += `<option value="${index}">${teeBox.teeType.toUpperCase()}, ${
-     teeBox.totalYards
-   } yards</option>`
+   teeBoxSelectHtml += `<option value="${index}">${teeBox.teeType.toUpperCase()}, ${teeBox.totalYards} yards</option>`
 });
 document.getElementById('tee-box-select').innerHTML = teeBoxSelectHtml;
 
@@ -107,26 +123,24 @@ toastr.success(`${playerName}, you are (L)PGA Tour material`);
 
 
 
-/* let url = 'http://uxcobra.com/golfapi/course11819.txt';
-        fetch(url)
-            .then( response => response.json() )
-            .then( data => mostrarData(data) )
-            .catch( error => console.log(error) )
 
-            const mostrarData = (data) => {
-              //console.log(data)
-              let body = "";
 
-                body += `<tr><th>Yards</th>
-                <td>${data.data.holes[0].changeLocations[0].yards}</td>
-                <td>${data.data.holes[1].changeLocations[0].yards}</td>
-                <td>${data.data.holes[2].changeLocations[0].yards}</td>
-                <td>${data.data.holes[3].changeLocations[0].yards}</td>
-                <td>${data.data.holes[4].changeLocations[0].yards}</td>
-                <td>${data.data.holes[5].changeLocations[0].yards}</td>
-                <td>${data.data.holes[6].changeLocations[0].yards}</td>
-                <td>${data.data.holes[7].changeLocations[0].yards}</td>
-                <td>${data.data.holes[8].changeLocations[0].yards}</td>
-                <td>XXXX</td></tr>`;
-              document.getElementById('data').innerHTML = body;
-            } */
+/*
+HACER CARATULA PARA ENCABEZADO
+
+"data":{
+		"id": "11819",
+                    "courseId": 11819,
+                    "holeCount": 18,
+                    "name": "Thanksgiving Point",
+                    "addr1": "599 N Frontage Rd",
+                    "city": "Lehi",
+                    "stateOrProvince": "UT",
+                    "country": "United States",
+                    "zipCode": "84043-3506",
+                    "phone": "(801)768-4955",
+                    "website": "http://www.thanksgivingpoint.org/visit/golf",
+                    "thumbnail":
+"https://swingbyswing-b9.s3.amazonaws.com/photo/in-round/10112953/uploaded-photo68921726-480x270.png",
+
+*/

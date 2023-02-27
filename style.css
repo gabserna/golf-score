@@ -1,19 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&family=Roboto:ital,wght@0,300;0,500;1,900&display=swap");
-/* body {
-    background-color: #000000;
-    color: #fff;
-    font-family: 'Heebo', sans-serif;
+body {
+  background-color: #000000;
+  color: #fff;
+  font-family: "Heebo", sans-serif;
 }
 
-.container {
-    width: 50%;
-    height: 500px;
-    margin: 0 auto;
-    padding: 0;
-    border: 2px solid #fff;
-    border-radius: 20px;
-} */
+.main {
+  border: 2px solid red;
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+.main .container {
+  height: 300px;
+  padding: 0;
+  border: 2px solid greenyellow;
+  border-radius: 20px;
+}
+
 table, th, td {
-  border: 1px solid black;
+  border: 1px solid #fff;
   border-collapse: collapse;
 }/*# sourceMappingURL=style.css.map */
