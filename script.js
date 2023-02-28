@@ -1,8 +1,8 @@
-/* fetch('courses.json')
+fetch('courses.json')
   .then(response => response.json())
   .then(data => {
-    var courses = data.data.Course;
-    var courseOptionsHtml = '';
+    let courses = data.data.course;
+    let courseOptionsHtml = '';
     courses.forEach((course) => {
       courseOptionsHtml += `<option value="${course.courseId}">${course.Name}</option>`;
     });
@@ -10,8 +10,31 @@
       document.getElementById('course-select').innerHTML = courseOptionsHtml;
     }
     console.log(data);
+
+    let url = courses[2].url;         //   <--- obtener URL
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => mostrarData(data))
+      .catch(error => console.log(error))
+    
+      console.log(data)
+    
+    const mostrarData = (data) => {
+      let body = "";
+      let sum = 0;
+      
+      for (let i = 0; i < 9; i++) {
+        body += `<td>${data.data.holes[i].changeLocations[0].yards}</td>`;
+        sum += data.data.holes[i].changeLocations.reduce((total, location) => total + location.yards, 0);
+      }
+      body += `<td>${sum}</td>`;
+      document.getElementById('table-header').innerHTML = `<tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
+      document.getElementById('data').innerHTML = "<tr><th>Yards</th>" + body + "</tr>";
+    }
 })
-.catch(error => console.log(error)); */
+.catch(error => console.log(error));
+
 
 
 
@@ -20,28 +43,6 @@
 
 
 
-
-
-let url = 'http://uxcobra.com/golfapi/course11819.txt';
-fetch(url)
-  .then(response => response.json())
-  .then(data => mostrarData(data))
-  .catch(error => console.log(error))
-
-  console.log(data)
-
-const mostrarData = (data) => {
-  let body = "";
-  let sum = 0;
-  
-  for (let i = 0; i < 9; i++) {
-    body += `<td>${data.data.holes[i].changeLocations[0].yards}</td>`;
-    sum += data.data.holes[i].changeLocations.reduce((total, location) => total + location.yards, 0);
-  }  
-  body += `<td>${sum}</td>`;
-  document.getElementById('table-header').innerHTML = `<tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
-  document.getElementById('data').innerHTML = "<tr><th>Yards</th>" + body + "</tr>";
-}
 
 
 
