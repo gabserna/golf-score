@@ -5,14 +5,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&family=Roboto:ital,wght@0,300;0,500;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/toastr/toastr.min.css">
+    <!-- <link rel="stylesheet" href="/toastr/toastr.min.css"> -->
     <link rel="stylesheet" href="style.css">
     <title>Golf Score App</title>
 </head>
 <body>
     <div class="main">
         
-        <div class="form-group">
+        <div class="selector form-group">
             <label for="course-select">Select Course</label>
             <select class="form-control" id="course-select"></select>
         </div>
@@ -31,7 +31,7 @@
         
         <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
             <h1>Golf Score App</h1>
-            <table class="table table-bordered table-striped">
+            <table id="fancy" class="table table-bordered table-striped">
             <thead id="table-header"></thead>
               <tbody id="data"></tbody>
             </table>
@@ -60,7 +60,7 @@
         </div> -->
     </div>
     <script src="script.js"></script>
-    <script src="toastr/toastr.min.js"></script>
+    <!-- <script src="toastr/toastr.min.js"></script> -->
     <!-- <script src="/toastr/toastr.min.js"></script> -->
 </body>
 </html>
