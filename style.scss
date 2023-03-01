@@ -24,10 +24,15 @@ body {
     }
 }
 
+.container {
+    overflow-x: auto;
+}
+
 #fancy {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
+
 }
 #fancy td, #fancy th {
     width: 4vw;

@@ -48,20 +48,7 @@ fetch('courses.json')
 
 
 
-// inyectar por js desde html lineas 45-57   ?????
-// hcp  falta
-
-
-
-
-
-
-
-
-
 /*
-
-
 function getAvailableCourses() {
  return fetch('https://golf-courses-api.herokuapp.com/courses/')
  .then(function (response) {
