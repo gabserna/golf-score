@@ -11,7 +11,7 @@ fetch('courses.json')
     }
     console.log(data);
 
-    let url = courses[2].url;         //   <--- obtener URL
+    let url = courses[0].url;         //   <--- obtener URL
 
     fetch(url)
       .then(response => response.json())
@@ -22,15 +22,25 @@ fetch('courses.json')
     
     const mostrarData = (data) => {
       let body = "";
-      let sum = 0;
+      let parBody = "";
+      let hcpBody = "";
+      let yardSum = 0;
+      let parSum = 0;
+      let hcpSum = 0;
       
       for (let i = 0; i < 9; i++) {
         body += `<td>${data.data.holes[i].changeLocations[0].yards}</td>`;
-        sum += data.data.holes[i].changeLocations.reduce((total, location) => total + location.yards, 0);
+        parBody += `<td>${data.data.holes[i].changeLocations[0].par}</td>`;
+        hcpBody += `<td>${data.data.holes[i].changeLocations[0].hcp}</td>`;
+        yardSum += data.data.holes[i].changeLocations.reduce((total, location) => total + location.yards, 0);
+        parSum += data.data.holes[i].changeLocations.reduce((total, location) => total + location.par, 0);
+        hcpSum += data.data.holes[i].changeLocations.reduce((total, location) => total + location.hcp, 0);
       }
-      body += `<td>${sum}</td>`;
+      body += `<td>${yardSum}</td>`;
+      parBody += `<td>${parSum}</td>`;
+      hcpBody += `<td>${hcpSum}</td>`;
       document.getElementById('table-header').innerHTML = `<tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
-      document.getElementById('data').innerHTML = "<tr><th>Yards</th>" + body + "</tr>";
+      document.getElementById('data').innerHTML = "<tr><th>Yards</th>" + body + "</tr><tr><th>Par</th>" + parBody + "</tr><tr><th>Handicap</th>" + hcpBody + "</tr>";
     }
 })
 .catch(error => console.log(error));
@@ -39,7 +49,7 @@ fetch('courses.json')
 
 
 // inyectar por js desde html lineas 45-57   ?????
-// par, hcp  falta
+// hcp  falta
 
 
 
