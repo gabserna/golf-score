@@ -6,19 +6,47 @@ body {
 }
 
 .main {
-  border: 2px solid red;
+  border: 3px solid #fff;
   width: 50%;
   margin: 0 auto;
-  border-radius: 20px;
+  padding: 2vw;
+  border-radius: 10px;
+}
+.main .selector {
+  padding: 1vw;
 }
 .main .container {
   height: 300px;
-  padding: 0;
+  padding: 1vw;
   border: 2px solid greenyellow;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
-table, th, td {
-  border: 1px solid #fff;
+#fancy {
+  font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
+  width: 100%;
+}
+
+#fancy td, #fancy th {
+  width: 4vw;
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+/* #fancy tr:nth-child(even){
+    background-color: #f2f2f2;
+} */
+#fancy tr:hover {
+  background-color: #dedede;
+  color: #000000;
+}
+
+#fancy th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #858585;
+  color: white;
 }/*# sourceMappingURL=style.css.map */
