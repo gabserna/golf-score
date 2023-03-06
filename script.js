@@ -1,53 +1,74 @@
+let courses = [];
+
 fetch('courses.json')
   .then(response => response.json())
   .then(data => {
-    let courses = data.data.course;
-    let courseOptionsHtml = '';
-    courses.forEach((course) => {
-      courseOptionsHtml += `<option value="${course.courseId}">${course.Name}</option>`;
-    });
-    if (courseOptionsHtml) {
-      document.getElementById('course-select').innerHTML = courseOptionsHtml;
-    }
-    console.log(data);
+    courses = data.data.course;
+    renderSelectCourse();
 
     let url = courses[0].url;         //   <--- obtener URL
 
-    fetch(url)
-      .then(response => response.json())
-      .then(data => mostrarData(data))
-      .catch(error => console.log(error))
-    
-      console.log(data)
-    
-    const mostrarData = (data) => {
-      let body = "";
-      let parBody = "";
-      let hcpBody = "";
-      let yardSum = 0;
-      let parSum = 0;
-      let hcpSum = 0;
-      
-      for (let i = 0; i < 9; i++) {
-        body += `<td>${data.data.holes[i].changeLocations[0].yards}</td>`;
-        parBody += `<td>${data.data.holes[i].changeLocations[0].par}</td>`;
-        hcpBody += `<td>${data.data.holes[i].changeLocations[0].hcp}</td>`;
-        yardSum += data.data.holes[i].changeLocations.reduce((total, location) => total + location.yards, 0);
-        parSum += data.data.holes[i].changeLocations.reduce((total, location) => total + location.par, 0);
-        hcpSum += data.data.holes[i].changeLocations.reduce((total, location) => total + location.hcp, 0);
-      }
-      body += `<td>${yardSum}</td>`;
-      parBody += `<td>${parSum}</td>`;
-      hcpBody += `<td>${hcpSum}</td>`;
-      document.getElementById('table-header').innerHTML = `<tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
-      document.getElementById('data').innerHTML = "<tr><th>Yards</th>" + body + "</tr><tr><th>Par</th>" + parBody + "</tr><tr><th>Handicap</th>" + hcpBody + "</tr>";
-    }
+    getCourseData(url).then(data =>mostrarData(data) )
 })
 .catch(error => console.log(error));
 
+addEventListener("change", handleOnSelect);
 
+function renderSelectCourse() {
+  let courseOptionsHtml = '';
+  courses.forEach((course) => {
+    courseOptionsHtml += `<option value="${course.courseId}">${course.Name}</option>`;
+  });
+  if (courseOptionsHtml) {
+    document.getElementById('course-select').innerHTML = courseOptionsHtml;
+  }
+}
 
+function handleOnSelect(event) {
+  const selectorId = event.target.value
+  const urlForCourse = getUrlForCourse(selectorId);
 
+  getCourseData(urlForCourse).then(data => mostrarData(data))
+}
+
+function getUrlForCourse(selectorId) {
+  const course = getCourseById(selectorId);
+
+  return course.url ?? '';
+}
+
+function getCourseById(selectorId) {
+  return courses.find(course => course.courseId === Number(selectorId));
+}
+
+async function getCourseData(url) {
+  return fetch(url)
+  .then(response => response.json())
+  .then(data => mostrarData(data))
+  .catch(error => console.log(error))
+}
+const mostrarData = (data) => {
+  let body = "";
+  let parBody = "";
+  let hcpBody = "";
+  let yardSum = 0;
+  let parSum = 0;
+  let hcpSum = 0;
+  
+  for (let i = 0; i < 9; i++) {
+    body += `<td>${data.data.holes[i].changeLocations[0].yards}</td>`;
+    parBody += `<td>${data.data.holes[i].changeLocations[0].par}</td>`;
+    hcpBody += `<td>${data.data.holes[i].changeLocations[0].hcp}</td>`;
+    yardSum += data.data.holes[i].changeLocations.reduce((total, location) => total + location.yards, 0);
+    parSum += data.data.holes[i].changeLocations.reduce((total, location) => total + location.par, 0);
+    hcpSum += data.data.holes[i].changeLocations.reduce((total, location) => total + location.hcp, 0);
+  }
+  body += `<td>${yardSum}</td>`;
+  parBody += `<td>${parSum}</td>`;
+  hcpBody += `<td>${hcpSum}</td>`;
+  document.getElementById('table-header').innerHTML = `<tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
+  document.getElementById('data').innerHTML = "<tr><th>Yards</th>" + body + "</tr><tr><th>Par</th>" + parBody + "</tr><tr><th>Handicap</th>" + hcpBody + "</tr>";
+}
 /*
 function getAvailableCourses() {
  return fetch('https://golf-courses-api.herokuapp.com/courses/')
