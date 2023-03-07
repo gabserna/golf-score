@@ -6,11 +6,11 @@ fetch('courses.json')
     courses = data.data.course;
     renderSelectCourse();
 
-    let url = courses[0].url;         //   <--- obtener URL
+    let url = courses[0].url;
 
-    getCourseData(url).then(data =>mostrarData(data) )
-})
-.catch(error => console.log(error));
+    getCourseData(url).then(data => mostrarData(data))
+  })
+  .catch(error => console.log(error));
 
 addEventListener("change", handleOnSelect);
 
@@ -43,10 +43,10 @@ function getCourseById(selectorId) {
 
 async function getCourseData(url) {
   return fetch(url)
-  .then(response => response.json())
-  .then(data => mostrarData(data))
-  .catch(error => console.log(error))
+    .then(response => response.json())
+    .catch(error => console.log(error))
 }
+
 const mostrarData = (data) => {
   let body = "";
   let parBody = "";
@@ -54,7 +54,7 @@ const mostrarData = (data) => {
   let yardSum = 0;
   let parSum = 0;
   let hcpSum = 0;
-  
+
   for (let i = 0; i < 9; i++) {
     body += `<td>${data.data.holes[i].changeLocations[0].yards}</td>`;
     parBody += `<td>${data.data.holes[i].changeLocations[0].par}</td>`;
@@ -69,6 +69,8 @@ const mostrarData = (data) => {
   document.getElementById('table-header').innerHTML = `<tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
   document.getElementById('data').innerHTML = "<tr><th>Yards</th>" + body + "</tr><tr><th>Par</th>" + parBody + "</tr><tr><th>Handicap</th>" + hcpBody + "</tr>";
 }
+
+
 /*
 function getAvailableCourses() {
  return fetch('https://golf-courses-api.herokuapp.com/courses/')
