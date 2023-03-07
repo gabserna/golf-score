@@ -71,6 +71,29 @@ const mostrarData = (data) => {
 }
 
 
+function golfScore(pars, hits) {
+  if (hits == 1) {
+    return "Hole-in-one";
+  } else if (hits <= pars - 2) {
+    return "Eagle";
+  } else if (hits == pars - 1) {
+    return "Birdie";
+  } else if (hits == pars) {
+    return "Par";
+  } else if (hits == pars + 1) {
+    return "Bogey";
+  } else if (hits == pars + 2) {
+    return "Double Bogey";
+  } else if (hits >= pars + 3) {
+    return "Go Home!";
+  }
+}
+console.log(golfScore(4, 15));
+
+
+
+
+
 /*
 function getAvailableCourses() {
  return fetch('https://golf-courses-api.herokuapp.com/courses/')
