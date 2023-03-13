@@ -53,4 +53,8 @@ body {
   text-align: center;
   background-color: #858585;
   color: white;
+}
+
+#course-select {
+  width: 20%;
 }/*# sourceMappingURL=style.css.map */
