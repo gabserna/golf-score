@@ -214,7 +214,7 @@ toastr.success(`${playerName}, you are (L)PGA Tour material`);
 
 
 /*
-HACER CARATULA PARA ENCABEZADO
+HACER CARATULA PARA ENCABEZADO principal
 
 "data":{
 		"id": "11819",
