@@ -33,6 +33,10 @@
             <div class="selector form-group">
                 <label for="course-select">Select Course</label>
                 <select class="form-control" id="course-select" onselect="handleOnSelect(event)"></select>
+
+                <select class="form-control" id="tee-select" onchange="teeSelect(this.id)">
+                    <option value="initial">*Choose a Tee Box*</option>
+
                 <div id="tee-title"></div>
             </div>
             <table id="fancy" class="table table-bordered table-striped">

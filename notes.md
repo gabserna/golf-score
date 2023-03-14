@@ -10,3 +10,11 @@ luego de los hoyos 10 a 18, otra columna para el puntaje total combinado de 1-9 
 - Tienes que asegurarte de que puedes añadir 4 jugadores.
 - Cada jugador puede ingresar su puntaje en cada hoyo en el que juega.
 - El jugador que gana es el que tiene menos puntuación.
+
+- seleccionar primero el teeBox > teeType ????
+
+# hole >> teeboxes >> teeType || teeColorType
+pro - black
+champion - blue
+men - white
+women - red

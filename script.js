@@ -12,13 +12,34 @@ fetch('courses.json')
     courses = data.data.course;
     renderSelectCourse();
     let url = courses[0].url;
-    getCourseData(url).then(data => mostrarData(data))
+    getCourseData(url).then(data => mostrarData(data))   //enviar a tee seleccion luego a mostrarData
   })
   .catch(error => console.log(error));
 //------------------------------------------------
 
 //************************************************************** */
-let teeBoxSelectHtml = ''
+
+// menu de seleccion de golf courses
+function handleOnTeeSelect(event) {
+  const teeSelector = Number(event.target.value);
+  const course = getTeeByColor(selectorId);
+  const teeColor = data.holes.teeBoxes.teeColorType;
+  getCourseData(url).then(data => mostrarData(data));
+}
+  
+function getTeeByColor(teeColor) {
+  return courses.find(course => data.holes.teeBoxes.teeColorType === teeColor);
+}
+
+
+function getUrlForCourse(teeColorType) {
+  const course = getTeeByColor(teeColorType);
+
+  //return course.url ?? '';
+  return course.teeColorType;
+}
+
+/* let teeBoxSelectHtml = ''
 teeBoxes.forEach(function (teeBox, index) {
    teeBoxSelectHtml += `<option value="${index}">${teeBox.teeType.toUpperCase()}, ${teeBox.totalYards} yards</option>`
 });
@@ -77,7 +98,7 @@ async function teeSelect(clickedId) {
 
   // Llamada a la función renderAPI() con el arreglo correctHoles
   renderAPI(correctHoles);
-};
+}; */
 
 
 
@@ -97,7 +118,7 @@ function renderSelectCourse() {
   courseSelect.addEventListener('change', handleOnSelect);
 }
 
-
+// menu de seleccion de golf courses
 function handleOnSelect(event) {
   const selectorId = Number(event.target.value);
   const course = getCourseById(selectorId);
