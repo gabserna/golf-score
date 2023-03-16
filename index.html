@@ -30,21 +30,25 @@
             </div> -->
             
             <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
-            <div class="selector form-group">
-                <label for="course-select">Select Course</label>
-                <select class="form-control" id="course-select" onselect="handleOnSelect(event)"></select>
+                <div class="selector form-group">
+                    <label for="course-select">Select Course</label>
+                    <select class="form-control" id="course-select" onselect="handleOnSelect(event)"></select>
+            
+                    <!-- <select class="form-control" id="tee-select" onchange="teeSelect(this.id)">
+                        <option value="initial">*Choose a Tee Box*</option> -->
 
-                <select class="form-control" id="tee-select" onchange="teeSelect(this.id)">
-                    <option value="initial">*Choose a Tee Box*</option>
-
-                <div id="tee-title"></div>
+                        <div id="tee-title"></div>
+                </div>
+                <div id="playerData"></div>
+                <table id="fancy" class="table table-bordered table-striped">
+                    <thead id="table-header"></thead>
+                    <tbody id="holes0-9"></tbody>
+                    <br>
+                    <thead id="table-header2"></thead>
+                    <tbody id="holes10-18"></tbody>
+                    <!-- <tbody id="playerData"></tbody> -->
+                </table>
             </div>
-            <table id="fancy" class="table table-bordered table-striped">
-            <thead id="table-header"></thead>
-            <tbody id="data"></tbody>
-            <tbody id="playerData"></tbody>
-        </table>
-        </div>
 
 
 
@@ -83,15 +87,6 @@
 
   
       </div>
-
-
-
-
-
-
-
-
-
 
 
     <script defer src="script.js"></script>

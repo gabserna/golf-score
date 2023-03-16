@@ -47,7 +47,7 @@ document.getElementById('tee-box-select').innerHTML = teeBoxSelectHtml;
 
 let teeHTML = `
 <select class="form-control" id="tee-select" onchange="teeSelect(this.id)">
-    <option value="initial">--Select a Tee Box--</option>
+    <option value="initial">*Choose a Tee Box*</option>
 `; 
 
 async function getTee(){
@@ -68,6 +68,8 @@ async function getTee(){
     document.getElementById('tee-title').innerHTML = teeHTML;
 };
 
+
+//tee selector
 async function teeSelect(clickedId) {
   // populates tee title then calls populate passing it the tee color
   const teeTitle = document.getElementById('tee-title');
@@ -145,6 +147,10 @@ async function getCourseData(url) {
   return data;
 }
 
+
+
+
+
 const mostrarData = (data) => {
   let body = "";
   let parBody = "";
@@ -152,7 +158,8 @@ const mostrarData = (data) => {
   let yardSum = 0;
   let parSum = 0;
   let hcpSum = 0;
-
+  
+  // loop through the front nine holes
   for (let i = 0; i < 9; i++) {
     const locations = data.data.holes[i].changeLocations;
     for (let j = 0; j < locations.length; j++) {
@@ -165,28 +172,54 @@ const mostrarData = (data) => {
     }
   }
   
+  document.getElementById('playerData').innerHTML = "<button onclick=\"addPlayers()\">Add Players</button>";
   body += `<th>${yardSum}</th>`;
   parBody += `<th>${parSum}</th>`;
   hcpBody += `<th>${hcpSum}</th>`;
-  document.getElementById('table-header').innerHTML = `
-    <tr>
-      <th>Hole</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-      <th>5</th>
-      <th>6</th>
-      <th>7</th>
-      <th>8</th>
-      <th>9</th>
-      <th>Out</th>
-      </tr>
-  `;  
+  document.getElementById('table-header').innerHTML = `<tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
+  document.getElementById('holes0-9').innerHTML = "<tr><th>Yards</th>" + body + "</tr><tr><th>Par</th>" + parBody + "</tr><tr><th>Handicap</th>" + hcpBody + "</tr>";
+  
+  let body2 = "";
+  let parBody2 = "";
+  let hcpBody2 = "";
+  let yardSum2 = 0;
+  let parSum2 = 0;
+  let hcpSum2 = 0;
 
-  document.getElementById('data').innerHTML = "<tr><th>Yards</th>" + body + "</tr><tr><th>Par</th>" + parBody + "</tr><tr><th>Handicap</th>" + hcpBody + "</tr>";
-  document.getElementById('playerData').innerHTML = "<button onclick=\"addPlayers()\">Add Players</button>";
+  // loop through the back nine holes
+  for (let i = 9; i < 18; i++) {
+    const locations = data.data.holes[i].changeLocations;
+    for (let k = 0; k < locations.length; k++) {
+      body2 += `<td>${locations[k].yards}</td>`;
+      parBody2 += `<td>${locations[k].par}</td>`;
+      hcpBody2 += `<td>${locations[k].hcp}</td>`;
+      yardSum2 += locations[k].yards;
+      parSum2 += locations[k].par;
+      hcpSum2 += locations[k].hcp;
+    }
+  }
+  
+  let totalyards = yardSum + yardSum2;
+  let totalpar = parSum + parSum2;
+  let totalhcp = hcpSum + hcpSum2;
+  
+  body2 += `<th>${totalyards}</th>`;
+  parBody2 += `<th>${totalpar}</th>`;
+  hcpBody2 += `<th>${totalhcp}</th>`;
+  document.getElementById('table-header2').innerHTML = `</br><tr><th>Hole</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>In</th></tr>`;
+  document.getElementById('holes10-18').innerHTML = "<tr><th>Yards</th>" + body2 + "</tr><tr><th>Par</th>" + parBody2 + "</tr><tr><th>Handicap</th>" + hcpBody2 + "</tr>";
+  
+  //revisar si es mejor dentro o fuera de la tabla
+  //document.getElementById('playerData').innerHTML = "<button onclick=\"addPlayers()\">Add Players</button>";
 }
+
+
+
+
+
+
+
+
 
 
 function addPlayers() {
