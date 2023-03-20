@@ -183,7 +183,7 @@ const mostrarData = (data) => {
   body += `<th>${yardSum}</th>`;
   parBody += `<th>${parSum}</th>`;
   hcpBody += `<th>${hcpSum}</th>`;
-  document.getElementById('table-header1').innerHTML = `<th id="subtitler" colspan="11">Front Holes</th><tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
+  document.getElementById('table-header1').innerHTML = `<th id="subtitler" colspan="11">Front Nine</th><tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
   document.getElementById('holes0-9').innerHTML = "<tr><th>Yards</th>" + body + "</tr><tr><th>Par</th>" + parBody + "</tr><tr><th>Handicap</th>" + hcpBody + "</tr>";
   
   let body2 = "";
@@ -219,27 +219,43 @@ const mostrarData = (data) => {
   parBody2 += `<th>${totalpar}</th>`;
   hcpBody2 += `<th>${totalhcp}</th>`;
 
-  document.getElementById('table-header2').innerHTML = `<th id="subtitler" colspan="11">Back Holes</th><tr><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>In</th><th>Total</th></tr>`;
+  document.getElementById('table-header2').innerHTML = `<th id="subtitler" colspan="11">Back Nine</th><tr><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>In</th><th>Total</th></tr>`;
   document.getElementById('holes10-18').innerHTML = "<tr>" + body2 + "</tr><tr>" + parBody2 + "</tr><tr>" + hcpBody2 + "</tr>";
 }
 
-
+/* 
 function addPlayers() {
-  const table = document.createElement('table');
-  const thead = document.createElement('thead');
-  const tbody = document.createElement('tbody');
-  const headerRow = document.createElement('tr');
+  document.getElementById('playerScore').innerHTML = `<tr><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>In</th><th>Total</th></tr>`;
 
+//-----------------------------------------------------------------------
+  let playerBody = "";
+  let parPlayerBody = "";
+  let hcpPlayerBody = "";
+  let playerYardsSum = 0;
+  let parSum2 = 0;
+  let hcpSum2 = 0;
+  let totalyards = yardSum + playerYardsSum;
+  let totalpar = parSum + parSum2;
+  let totalhcp = hcpSum + hcpSum2;
+    
+  playerBody += `<th>${playerYardsSum}</th>`;
+  parPlayerBody += `<th>${parSum2}</th>`;
+  hcpPlayerBody += `<th>${hcpSum2}</th>`;
+
+  playerBody += `<th>${totalyards}</th>`;
+  parPlayerBody += `<th>${totalpar}</th>`;
+  hcpPlayerBody += `<th>${totalhcp}</th>`;
+  
   const holesHeader = document.createElement('th');
   holesHeader.textContent = 'Holes';
   headerRow.appendChild(holesHeader);
-
-  for (let i = 1; i <= 9; i++) {
+  
+  for (let i = 1; i <= 18; i++) {
     const holeHeader = document.createElement('th');
     holeHeader.textContent = i;
     headerRow.appendChild(holeHeader);
   }
-
+  
   const totalHeader = document.createElement('th');
   totalHeader.textContent = 'Total';
   headerRow.appendChild(totalHeader);
@@ -247,18 +263,20 @@ function addPlayers() {
   thead.appendChild(headerRow);
   table.appendChild(thead);
   table.appendChild(tbody);
-
+  
   for (let i = 1; i <= 4; i++) {
     const row = document.createElement('tr');
     const inputs = [];
     let total = 0;
-
-    const nameCell = document.createElement('td');
+    
+    const nameCell = document.createElement('th');
     nameCell.textContent = `Player ${i}`;
     row.appendChild(nameCell);
-
+    
     for (let j = 0; j < 9; j++) {
       const cell = document.createElement('td');
+      cell.style.width = '10px !important';
+      
       const input = document.createElement('input');
       input.type = "number";
       input.value = "";
@@ -274,16 +292,107 @@ function addPlayers() {
       row.appendChild(cell);
       inputs.push(input);
     }
-
+    
     const totalCell = document.createElement('td');
     totalCell.textContent = total;
     row.appendChild(totalCell);
-
+    
     tbody.appendChild(row);
   }
-
-  document.getElementById('playerTable').appendChild(table);
+  
+  document.getElementById('playerScore').appendChild(table);
+  document.getElementById('playerHolesInfo').innerHTML = "<tr>" + body2 + "</tr><tr>" + parBody2 + "</tr><tr>" + hcpBody2 + "</tr>";
 }
+ */
+
+
+
+function addPlayers() {
+  const table = document.createElement('table');
+  const thead = document.createElement('thead');
+  const tbody = document.createElement('tbody');
+  const headerRow = document.createElement('tr');
+  
+  headerRow.innerHTML = `<th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>In</th><th>Total</th>`;
+  
+  let yardSum = 0;
+  let parSum = 0;
+  let hcpSum = 0;
+  
+  for (let i = 1; i <= 18; i++) {
+    const yardCell = document.createElement('th');
+    yardCell.textContent = Math.floor(Math.random() * 100) + 1;
+    headerRow.appendChild(yardCell);
+    yardSum += parseInt(yardCell.textContent) || 0;
+    
+    const parCell = document.createElement('th');
+    parCell.textContent = Math.floor(Math.random() * 5) + 3;
+    headerRow.appendChild(parCell);
+    parSum += parseInt(parCell.textContent) || 0;
+    
+    const hcpCell = document.createElement('th');
+    hcpCell.textContent = Math.floor(Math.random() * 10) + 1;
+    headerRow.appendChild(hcpCell);
+    hcpSum += parseInt(hcpCell.textContent) || 0;
+  }
+  
+  const inCell = document.createElement('th');
+  inCell.textContent = yardSum;
+  headerRow.appendChild(inCell);
+  
+  const totalCell = document.createElement('th');
+  totalCell.textContent = yardSum * 2;
+  headerRow.appendChild(totalCell);
+  
+  thead.appendChild(headerRow);
+  
+  for (let i = 1; i <= 4; i++) {
+    const row = document.createElement('tr');
+    const inputs = [];
+    let total = 0;
+    
+    const nameCell = document.createElement('th');
+    nameCell.textContent = `Player ${i}`;
+    row.appendChild(nameCell);
+    
+    for (let j = 0; j < 18; j++) {
+      const cell = document.createElement('td');
+      cell.style.width = '10px';
+      
+      const input = document.createElement('input');
+      input.type = "number";
+      input.value = "";
+      input.addEventListener('change', () => {
+        total = 0;
+        inputs.forEach((input) => {
+          total += parseInt(input.value) || 0;
+        });
+        cell.textContent = input.value ? input.value : 0;
+        row.lastChild.textContent = total;
+      });
+      cell.appendChild(input);
+      row.appendChild(cell);
+      inputs.push(input);
+    }
+    
+    const inCell = document.createElement('td');
+    inCell.textContent = "";
+    row.appendChild(inCell);
+    
+    const totalCell = document.createElement('td');
+    totalCell.textContent = total;
+    row.appendChild(totalCell);
+    
+    tbody.appendChild(row);
+  }
+  
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  
+  document.getElementById('playerScore').innerHTML = "";
+  document.getElementById('playerScore').appendChild(table);
+}
+
 
 
 

@@ -10,7 +10,7 @@ body {
     border: 3px solid #fff;
     //width: 70%;
     margin: 0 auto;
-    padding: 1vw;
+    padding: 0.5vw;
     border-radius: 10px;
     
     .selector {
@@ -19,7 +19,7 @@ body {
     .container {
         margin: 0 auto;
         height: auto;
-        width: auto;
+        width: 95%;
         padding: 1vw;
         border: 2px solid greenyellow;
         border-radius: 10px;
@@ -82,4 +82,18 @@ h1 {
 
 #course-select {
     width: 25em;
-  }
+}
+
+#playerScore {
+    width: 100%;
+    height: 300px;
+    border: 2px solid orange;
+    overflow: hidden;
+    display: flex;
+}
+
+#playerScore td {
+    //margin: 0;
+    //width: 10px !important;
+    background-color: blue;
+}
