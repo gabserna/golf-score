@@ -1,23 +1,139 @@
 let courses = [];
 
-function getAvailableCourses() {
-  return fetch('courses.json')
-  .then(response => response.json());
-}
-//------------------------------------------------
-fetch('courses.json')
-  .then(response => response.json())
-  
+function renderCourses() {
+fetch('local-courses.json').then(response => response.json())
   .then(data => {
     courses = data.data.course;
     renderSelectCourse();
-    let url = courses[0].url;
-    getCourseData(url).then(data => mostrarData(data))   //enviar a tee seleccion luego a mostrarData
+    const url = courses[0].url;
+    return getCourseData(url)
   })
-  .catch(error => console.log(error));
-//------------------------------------------------
+  .then(data => mostrarData(data)).catch(error => console.log(error));
+  }
+  renderCourses()
 
-//************************************************************** */
+function renderSelectCourse() {
+  const courseSelect = document.getElementById('course-select');
+  courseSelect.innerHTML = courses.map(course => `<option value="${course.id}">${course.name}</option>`).join('');
+  courseSelect.addEventListener('change', handleOnSelect);
+}
+
+function handleOnSelect(event) {
+  const selectorId = Number(event.target.value);
+  const course = getCourseById(selectorId);
+  const url = course.url;
+  getCourseData(url).then(data => mostrarData(data));
+}
+
+function getCourseById(id) {
+  return courses.find(course => course.id === id);
+}
+
+function getUrlForCourse(selectorId) {
+  const course = getCourseById(selectorId);
+  return course.url ?? '';
+}
+
+async function getCourseData(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+// menu de seleccion Tee
+function handleOnTeeSelect(event) {
+  const teeSelector = Number(event.target.value);
+  const course = getTeeByColor(selectorId);
+  const teeColor = data.holes.teeBoxes.teeColorType;
+  getCourseData(url).then(data => mostrarData(data));
+}
+  
+function getTeeByColor(teeColor) {
+  return courses.find(course => data.holes.teeBoxes.teeColorType === teeColor);
+}
+
+function getUrlForCourse(teeColorType) {
+  const course = getTeeByColor(teeColorType);
+  return course.teeColorType;
+}
+
+// select tee functions
+let teeHTML = `<select class="form-control" id="tee-select" onchange="teeSelect(this.id)">
+  <option value="initial">--Select a Tee Box--</option>`;
+
+async function getTee(){
+  let course;
+  try {
+      course = await loadCourse();
+  }catch (error) {
+      console.log(`ERROR: ${error}`);
+  };
+  console.log(course.data.holes);
+  console.log(course.data.holes[0].teeBoxes);
+  course.data.holes[0].teeBoxes.forEach(tee => {
+      if (tee.teeColorType !== null) {
+          teeHTML += `<option value="${tee.teeColorType}">${tee.teeColorType}</option>`
+      };
+  });
+  teeHTML += `</select>`;
+  document.getElementById('tee-title').innerHTML = teeHTML;
+};
+
+async function teeSelect(clickedId) {
+  const teeTitle = document.getElementById('tee-title');
+  let color = document.getElementById(clickedId).value
+  teeTitle.innerHTML = "Tee Box: " + document.getElementById(clickedId).value; 
+
+
+
+  let course;
+  try {
+      course = await loadCourse();
+  }catch (error) {
+      console.log(`ERROR: ${error}`);
+  }
+  let correctHoles = []
+  course.data.holes.forEach(hole => {
+      hole.teeBoxes.forEach(box => {
+          if (box.teeColorType === color) {
+              correctHoles.push({
+                  id: box.courseHoleId,
+                  name: '',
+                  yardage: box.yards,
+                  par: box.par,
+                  handicap: box.hcp,
+          })
+          }
+      })
+  })
+
+
+  
+  mostrarData();
+  };
+
 
 // menu de seleccion de golf courses
 function handleOnTeeSelect(event) {
@@ -38,120 +154,7 @@ function getUrlForCourse(teeColorType) {
   //return course.url ?? '';
   return course.teeColorType;
 }
-
-/* 
-
-let teeBoxSelectHtml = ''
-teeBoxes.forEach(function (teeBox, index) {
-   teeBoxSelectHtml += `<option value="${index}">${teeBox.teeType.toUpperCase()}, ${teeBox.totalYards} yards</option>`
-});
-document.getElementById('tee-box-select').innerHTML = teeBoxSelectHtml;
-
-
-
-let teeHTML = `
-<select class="form-control" id="tee-select" onchange="teeSelect(this.id)">
-    <option value="initial">*Choose a Tee Box*</option>
-`; 
-
-async function getTee(){
-    let course;
-    try {
-        course = await loadCourse();
-    }catch (error) {
-        console.log(`ERROR: ${error}`);
-    };
-    console.log(course.data.holes);
-    console.log(course.data.holes[0].teeBoxes);
-    course.data.holes[0].teeBoxes.forEach(tee => {
-        if (tee.teeColorType !== null) {
-            teeHTML += `<option value="${tee.teeColorType}">${tee.teeColorType}</option>`
-        };
-    });
-    teeHTML += `</select>`;
-    document.getElementById('tee-title').innerHTML = teeHTML;
-};
-
-
-//tee selector
-async function teeSelect(clickedId) {
-  // populates tee title then calls populate passing it the tee color
-  const teeTitle = document.getElementById('tee-title');
-  let color = document.getElementById(clickedId).value
-  teeTitle.innerHTML = "Tee Box: " + document.getElementById(clickedId).value; 
-
-  let course;
-  try {
-      course = await loadCourse();
-  }catch (error) {
-      console.log(`ERROR: ${error}`);
-  }
-  // loop through holes and create and array of correct teeboxes
-  let correctHoles = []
-  course.data.holes.forEach(hole => {
-      hole.teeBoxes.forEach(box => {
-          if (box.teeColorType === color) {
-              correctHoles.push({
-                  id: box.courseHoleId,
-                  name: '',
-                  yardage: box.yards,
-                  par: box.par,
-                  handicap: box.hcp,
-              })
-          }
-      })
-  })
-
-  // Llamada a la función renderAPI() con el arreglo correctHoles
-  renderAPI(correctHoles);
-}; */
-
-
-
-//************************************************************** */
-async function renderCourses() {
-  const response = await getAvailableCourses();
-  courses = response.data.course;
-  renderSelectCourse();
-  const url = courses[0].url;
-  const data = await getCourseData(url);
-  mostrarData(data);
-}
-
-function renderSelectCourse() {
-  const courseSelect = document.getElementById('course-select');
-  courseSelect.innerHTML = courses.map(course => `<option value="${course.courseId}">${course.Name}</option>`).join('');
-  courseSelect.addEventListener('change', handleOnSelect);
-}
-
-// menu de seleccion de golf courses
-function handleOnSelect(event) {
-  const selectorId = Number(event.target.value);
-  const course = getCourseById(selectorId);
-  const url = course.url;
-  getCourseData(url).then(data => mostrarData(data));
-}
-  
-function getCourseById(id) {
-  return courses.find(course => course.courseId === id);
-}
-
-
-function getUrlForCourse(selectorId) {
-  const course = getCourseById(selectorId);
-
-  //return course.url ?? '';
-  return course.url;
-}
-
-
-async function getCourseData(url) {
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
-}
-
-
+ */
 
 
 
@@ -180,7 +183,7 @@ const mostrarData = (data) => {
   body += `<th>${yardSum}</th>`;
   parBody += `<th>${parSum}</th>`;
   hcpBody += `<th>${hcpSum}</th>`;
-  document.getElementById('table-header').innerHTML = `<th id="subtitler" colspan="11">Front Holes</th><tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
+  document.getElementById('table-header1').innerHTML = `<th id="subtitler" colspan="11">Front Holes</th><tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
   document.getElementById('holes0-9').innerHTML = "<tr><th>Yards</th>" + body + "</tr><tr><th>Par</th>" + parBody + "</tr><tr><th>Handicap</th>" + hcpBody + "</tr>";
   
   let body2 = "";
@@ -221,32 +224,66 @@ const mostrarData = (data) => {
 }
 
 
-
-
-
-
-
-
-
-/* 
 function addPlayers() {
-  alert("clicked");
-}
- */
+  const table = document.createElement('table');
+  const thead = document.createElement('thead');
+  const tbody = document.createElement('tbody');
+  const headerRow = document.createElement('tr');
 
-function addPlayers() {
-  const text = document.getElementById('inputBox').value;
-  if (text === '') {
-    alert('You need to add some text!');
-    return false;
-  } else {
-    document.getElementById('inputBox').value = ''
-    showToDo();
-    keepRecord();
+  const holesHeader = document.createElement('th');
+  holesHeader.textContent = 'Holes';
+  headerRow.appendChild(holesHeader);
+
+  for (let i = 1; i <= 9; i++) {
+    const holeHeader = document.createElement('th');
+    holeHeader.textContent = i;
+    headerRow.appendChild(holeHeader);
   }
+
+  const totalHeader = document.createElement('th');
+  totalHeader.textContent = 'Total';
+  headerRow.appendChild(totalHeader);
+
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+  table.appendChild(tbody);
+
+  for (let i = 1; i <= 4; i++) {
+    const row = document.createElement('tr');
+    const inputs = [];
+    let total = 0;
+
+    const nameCell = document.createElement('td');
+    nameCell.textContent = `Player ${i}`;
+    row.appendChild(nameCell);
+
+    for (let j = 0; j < 9; j++) {
+      const cell = document.createElement('td');
+      const input = document.createElement('input');
+      input.type = "number";
+      input.value = "";
+      input.addEventListener('change', () => {
+        total = 0;
+        inputs.forEach((input) => {
+          total += parseInt(input.value) || 0;
+        });
+        cell.textContent = input.value ? input.value : 0;
+        row.lastChild.textContent = total;
+      });
+      cell.appendChild(input);
+      row.appendChild(cell);
+      inputs.push(input);
+    }
+
+    const totalCell = document.createElement('td');
+    totalCell.textContent = total;
+    row.appendChild(totalCell);
+
+    tbody.appendChild(row);
+  }
+
+  document.getElementById('playerTable').appendChild(table);
 }
-
-
 
 
 
@@ -280,31 +317,4 @@ console.log(golfScore(4, 15));
 //notification toastr 
 toastr.success(`${playerName}, you are (L)PGA Tour material`);
 */
-
-
-
-/*
-HACER CARATULA PARA ENCABEZADO principal
-
-"data":{
-		"id": "11819",
-                    "courseId": 11819,
-                    "holeCount": 18,
-                    "name": "Thanksgiving Point",
-                    "addr1": "599 N Frontage Rd",
-                    "city": "Lehi",
-                    "stateOrProvince": "UT",
-                    "country": "United States",
-                    "zipCode": "84043-3506",
-                    "phone": "(801)768-4955",
-                    "website": "http://www.thanksgivingpoint.org/visit/golf",
-                    "thumbnail":
-"https://swingbyswing-b9.s3.amazonaws.com/photo/in-round/10112953/uploaded-photo68921726-480x270.png",
-
-*/
-
-
-
-
-
 

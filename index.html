@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&family=Roboto:ital,wght@0,300;0,500;1,900&display=swap" rel="stylesheet">
@@ -12,6 +14,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Golf Score App</title>
 </head>
+
 <body>
     <div class="main">
 
@@ -24,7 +27,7 @@
 
 
         <div>
-            <i class="fas fa-golf-flag-hole"><---- golf icon here???</i>
+            <i class="fas fa-golf-flag-hole"> \---- golf icon here???</i>
             <i class="fal fa-golf-flag-hole"></i>
             <i class="far fa-golf-ball-tee"></i>
             <i class="fal fa-golf-club"></i>
@@ -64,7 +67,7 @@
                 
                 <div class="tables-container">
                     <table id="fancy" class="table1 table-bordered table-striped">
-                        <thead id="table-header"></thead>
+                        <thead id="table-header1"></thead>
                         <tbody id="holes0-9"></tbody>
                     </table>
                     <div class="spacer"></div>
@@ -75,14 +78,16 @@
                 </div>
                 <!--  REVISAR SECCION DE INYECCION DE FILAS PARA 4 PLAYERS  -->
                 <div class="tables-container2">
+                    <!-- <div id="table-header3"></div> -->
+
                     <table id="fancy" class="players-table1 table-bordered table-striped">
-                        <tbody id="players1to9"></tbody>
-                        <input id="inputBox" class="inputBox" type="text" placeholder="some">
+                        <thead id="playerTable"></thead>
+                        <div class="spacer"></div>
+                        <thead id="table-header4"></thead>
                     </table>
-                    <div class="spacer"></div>
-                    <table id="fancy" class="players-table1 table-bordered table-striped">
-                        <tbody id="players10to18"></tbody>
-                    </table>
+                    <!-- <table id="fancy" class="players-table2 table-bordered table-striped">
+                        
+                    </table> -->
                 </div>
                 <!--  REVISAR SECCION DE INYECCION DE FILAS PARA 4 PLAYERS  -->
 
@@ -128,8 +133,8 @@
       </div>
 
 
-    <script defer src="script.js"></script>
-    <!-- <script src="toastr/toastr.min.js"></script> -->
+      <script defer src="script.js"></script>
+      <!-- <script src="toastr/toastr.min.js"></script> -->
     <!-- <script src="/toastr/toastr.min.js"></script> -->
 </body>
 </html>
