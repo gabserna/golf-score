@@ -130,9 +130,7 @@ async function teeSelect(clickedId) {
       })
   })
 
-
-  
-  mostrarData();
+mostrarData();
   };
 
 

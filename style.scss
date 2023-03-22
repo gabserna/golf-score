@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&family=Roboto:ital,wght@0,300;0,500;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap');
 
 body {
     background-color: #000000;
@@ -7,42 +8,71 @@ body {
 }
 
 .main {
-    border: 3px solid #fff;
-    //width: 70%;
+    /* border: 3px solid #fff; */
     margin: 0 auto;
-    padding: 0.5vw;
-    border-radius: 10px;
+    padding: 0 1vw 0 1vw;
+    position: relative;
     
-    .selector {
-        padding: 1vw;
+    .bgnd-container {
+        position: relative;
+    
+        .bgnd {
+            width: 100%;
+            height: 40vh;
+            overflow : hidden;
+            z-index: -1;
+        
+            .bgnd-image {
+                height: 40vh;
+                min-width: 100%;
+            }
+        }
     }
+
     .container {
         margin: 0 auto;
         height: auto;
-        width: 95%;
-        padding: 1vw;
-        border: 2px solid greenyellow;
-        border-radius: 10px;
-    }
-    .tables-container {
-        display: flex;
-    }
-    .spacer {
-        width: 1vw;
+        width: auto;
+        padding: 0;
+        /* border: 2px solid greenyellow; */
+        overflow-x: auto;
+        
+        .titler {
+            position: absolute;
+            display: flex;
+            width: 70%;
+            height: 10vh;
+            flex-direction: row;
+            /* border: 5px solid red;
+            background-color: #ddd; */
+            top: 10vh;
+            left: 20vw;
+
+            .myh1 {
+                h1 {
+                    right: 3vw;
+                    color: #fff;
+                    margin: 0;
+                    padding: 0;
+                    font-size: 5vw;
+                    position: absolute;
+                    /* border: 2px solid blue; */
+                    z-index: 2;
+                }
+            }
+            .selector {
+                padding: 0;
+            }
+        }
+        .tables-container {
+            display: flex;
+        }
+        .spacer {   //remover???
+            width: 1vw;
+        }
     }
 }
 
-.container {
-    overflow-x: auto;
-    margin: 0 auto;
-    width: 80%;
-}
-
-h1 {
-    color: red;
-    margin: 0;
-    padding: 0;
-}
 
 #subtitler {
     text-align: left !important;
@@ -50,6 +80,11 @@ h1 {
     text-transform: uppercase;
     //color: #000000 !important;
 }
+
+#addMe {
+    border-radius: 50%;
+}
+
 
 #fancy {
     width: 100%;
@@ -95,12 +130,13 @@ input[type=number]::-webkit-outer-spin-button {
                     -webkit-appearance: none;
 }
 
-td:nth-child(11), td:nth-child(21) {
+td:nth-child(11), td:nth-child(21), td:nth-child(22) {
     background-color: darkgray;
 }
 
 td #anchoPlayer {
-    background-color: blue;
     width: 4vw !important;
-    color: crimson;
 }
+
+
+
