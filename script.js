@@ -228,107 +228,87 @@ addplayer.addEventListener("click", function() {
 });
 
 
-function addPlayers() {
-  const table = document.createElement('table');
-  const thead = document.createElement('thead');
+
+
+
+
+
+
+
+
+
+const addPlayers = () => {
   const tbody = document.createElement('tbody');
-  const headerRow = document.createElement('tr');
+  let sumOut = 0;
+  let sumIn = 0;
 
-    let sumOut = 0;
-    let sumIn = 0;
-    
-    // revisar mostrarData para modificar forma de inyectar datos
+  for (let i = 1; i <= 4; i++) {
+    const row = document.createElement('tr');
+    const nameCell = document.createElement('th');
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    /* nameInput.id = `playerName${i}`; */
+    nameInput.id = 'playersName';
+    nameInput.placeholder = `Player${i}`;
+    nameCell.appendChild(nameInput);
+    row.appendChild(nameCell);
 
-    const inCellHeader = document.createElement('th');
-    inCellHeader.textContent = "";
-    headerRow.appendChild(inCellHeader);
-    
-    const totalCellHeader = document.createElement('th');
-    totalCellHeader.textContent = "";
-    headerRow.appendChild(totalCellHeader);
-    
-    thead.appendChild(headerRow);
-    
-    for (let i = 1; i <= 4; i++) {
-      const row = document.createElement('tr');
-      const inputs = [];
-      let totalOut = 0;
-      let totalIn = 0;
-      
-      const nameCell = document.createElement('th');
+    let totalOut = 0;
+    let totalIn = 0;
+
+    for (let j = 0; j <= 18; j++) {
+      const cell = document.createElement('td');
       const input = document.createElement('input');
-      input.type = "text";
-      input.value = "";
-      input.setAttribute("placeholder", `Player ${i}`);
-      nameCell.id = 'anchoPlayer';
-  
-      row.appendChild(nameCell);
-    
-      for (let j = 0; j < 19; j++) {     // revisar para suma
-        const cell = document.createElement('td');
-        const input = document.createElement('input');
-        input.type = "number";
-        input.value = "";
-        input.addEventListener('change', () => {
-          totalOut = 0;
-          totalIn = 0;
-          inputs.forEach((input, index) => {
-            const value = parseInt(input.value) || 0;
-            if (index < 9) {
-              totalOut += value;
-            } else {
-              totalIn += value;
-            }
-          });
-          cell.textContent = input.value ? input.value : 0;
-          row.childNodes[10].textContent = totalOut;
-          row.childNodes[19].textContent = totalIn;
-          row.lastChild.textContent = totalOut + totalIn;
-          sumOut = 0;
-          sumIn = 0;
-          tbody.childNodes.forEach((row) => {
-            sumOut += parseInt(row.childNodes[10].textContent) || 0;
-            sumIn += parseInt(row.childNodes[20].textContent) || 0;
-          });
-          inCellHeader.textContent = sumIn;
-          totalCellHeader.textContent = sumOut + sumIn;
-        });
-        cell.appendChild(input);
-        row.appendChild(cell);
-        inputs.push(input);
-      }
-      
-      //Valores del Player
-      const inCell = document.createElement('td');
-      inCell.textContent = "";
-      row.appendChild(inCell);
-      
-      //totales de Out
-      const totalCellOut = document.createElement('td');
-      totalCellOut.textContent = totalOut;
-      row.appendChild(totalCellOut);
-      
-      //totales de In
-      const totalCellIn = document.createElement('td');
-      totalCellIn.textContent = totalIn;
-      row.appendChild(totalCellIn);
-      
-      //Suma del Total
-      const totalCell = document.createElement('td');
-      totalCell.textContent = totalOut + totalIn;
-      row.appendChild(totalCell);
-      
-      tbody.appendChild(row);
-    }
-    
-  table.appendChild(thead);
-  table.appendChild(tbody);
-  
-  document.getElementById('scoreHead').innerHTML = `<th>Name</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>In</th><th>Total</th>`;
+      input.type = 'number';
+      input.id = 'strokes';
 
-  document.getElementById('scoreBody').innerHTML = ``;
+      input.addEventListener('change', () => {
+        const value = parseInt(input.value) || 0;
+        if (j <= 9) {
+          totalOut += value;
+        } else {
+          totalIn += value;
+        }
+        row.childNodes[10].textContent = totalOut;
+        row.childNodes[20].textContent = totalIn;
+        row.lastChild.textContent = totalOut + totalIn;
+
+        sumOut = 0;
+        sumIn = 0;
+        tbody.childNodes.forEach((row) => {
+          sumOut += parseInt(row.childNodes[10].textContent);
+          sumIn += parseInt(row.childNodes[20].textContent);
+        });
+        document.getElementById('outHeader').textContent = sumOut;
+        document.getElementById('inHeader').textContent = sumIn;
+        document.getElementById('totalHeader').textContent = sumOut + sumIn;
+      });
+
+      cell.appendChild(input);
+      row.appendChild(cell);
+    }
+
+    const inCell = document.createElement('td');
+    const totalOutCell = document.createElement('td');
+    const totalInCell = document.createElement('td');
+    const totalCell = document.createElement('td');
+    row.appendChild(inCell);
+    row.appendChild(totalOutCell);
+    row.appendChild(totalInCell);
+    row.appendChild(totalCell);
+    tbody.appendChild(row);
+  }
   
+  document.getElementById('scoreHead').innerHTML = '<th>Name</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>In</th><th>Total</th>';
+
+  const scoreBody = document.getElementById('scoreBody');
+  scoreBody.innerHTML = '';
+  scoreBody.appendChild(tbody);
 }
+
+
+
+
 
 
 

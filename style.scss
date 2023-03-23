@@ -60,10 +60,11 @@ body {
                 padding: 0;
             }
         }
-        .tableContainer {
+        .tableContainer, .playerScoreTable {
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            border: 2px solid greenyellow;
+            /* border: 2px solid greenyellow; */
         }
         
     }
@@ -86,12 +87,8 @@ body {
     text-transform: uppercase;
 }
 
-#addMe {
-    border-radius: 50%;
-}
 
-
-#fancy {
+#fancy, .playerScoreTable {
     width: auto;
     height: auto;   //revisar si es suficiente..........!!!!!!
     margin: 0 auto;
@@ -100,6 +97,7 @@ body {
     table-layout: fixed;
     text-align: center;
 }
+
 #fancy th {
     background-color: #008000;
     text-align: center;
@@ -117,16 +115,26 @@ body {
     color: #000000;
 }
   
-
 #course-select {
     width: 25em;
 }
 
-#tableHead, #scoreHead {
+#tableHead {
     height: 10.5vh;
 }
 
 
+#playersName {
+    width: 3.5em;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#strokes {
+    text-align: center;
+    width: 3vw;
+    margin: 0 !important;
+    padding: 0 !important;
+}
 
 input {
     width: 1.5vw;
@@ -136,13 +144,9 @@ input[type=number]::-webkit-outer-spin-button {
                     -webkit-appearance: none;
 }
 
-td:nth-child(11), td:nth-child(21), td:nth-child(22) {
-    background-color: darkgray;
+td:nth-child(11),
+td:nth-child(21),
+td:nth-child(24) {
+    background-color: #008000;
+    color: #fff;
 }
-
-td #anchoPlayer {
-    width: 4vw !important;
-}
-
-
-
