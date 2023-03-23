@@ -8,7 +8,6 @@ body {
 }
 
 .main {
-    /* border: 3px solid #fff; */
     margin: 0 auto;
     padding: 0 1vw 0 1vw;
     position: relative;
@@ -34,7 +33,6 @@ body {
         height: auto;
         width: auto;
         padding: 0;
-        /* border: 2px solid greenyellow; */
         overflow-x: auto;
         
         .titler {
@@ -43,8 +41,6 @@ body {
             width: 70%;
             height: 10vh;
             flex-direction: row;
-            /* border: 5px solid red;
-            background-color: #ddd; */
             top: 10vh;
             left: 20vw;
 
@@ -64,15 +60,24 @@ body {
                 padding: 0;
             }
         }
-        .tables-container {
+        .tableContainer {
             display: flex;
+            flex-direction: column;
+            border: 2px solid greenyellow;
         }
-        .spacer {   //remover???
-            width: 1vw;
-        }
+        
     }
 }
 
+#playerData button {
+    width: 10em;
+    height: 3em;
+    background-color: #008000;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 20px;
+    border: none;
+}
 
 #subtitler {
     text-align: left !important;
@@ -95,7 +100,7 @@ body {
     text-align: center;
 }
 #fancy th {
-    background-color: #858585;
+    background-color: #008000;
     text-align: center;
     color: white;
     padding: 1vh 1vh;
@@ -116,7 +121,7 @@ body {
     width: 25em;
 }
 
-#table-header1, #table-header2, #playerScore {
+#tableHead, #scoreHead {
     height: 10.5vh;
 }
 

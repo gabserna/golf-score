@@ -33,46 +33,38 @@
                     <h1 class="main-title">Golf Score App!</h1>
                 </div>
                 <div class="selector">
-                    <div class="form-group">
-                        <label for="course-select">Select Course</label>
-                        <select class="form-control" id="course-select" onselect="handleOnSelect(event)"></select>
-                
-                        <!-- <select class="form-control" id="tee-select" onchange="teeSelect(this.id)">
-                            <option value="initial">*Choose a Tee Box*</option> -->
-                            <div id="tee-title"></div>
-                    </div>
-                    <div id="playerData"></div>
-                </div>
-            </div>
-                
-                
-                <div class="tables-container">
-                    <table id="fancy">
-                        <thead id="table-header1"></thead>
-                        <tbody id="holes0-9"></tbody>
-                    </table>
                     
-                    <table id="fancy">
-                        <thead id="table-header2"></thead>
-                        <tbody id="holes10-18"></tbody>
-                    </table>
-                </div>
-                
-
-
-                <div class="tables-container2">
-                    <div>
-                    <table id="fancy" class="theTable players-table1 table-bordered table-striped">
-                        <thead id="playerScore"></thead>
-                        <tbody id="playerHolesInfo"></tbody>
-                    </table>
+                    <div class="form-group">
+                        <label for="course-select">Select Course:</label><br>
+                        <select class="form-control" id="course-select" onselect="handleOnSelect(event)"></select><br><br>
+                        
+                        <label for="tee-select">Select a Tee:</label><br>
+                        <select class="form-control" id="tee-select" onchange="teeSelect(this.id)"></select><br><br>
+                        <!-- <option value="initial">*Choose a Tee Box*</option> -->
+                        <div id="playerData"></div>  <!-- Aqui va boton de addPlayers-->
                     </div>
+
                 </div>
-                
-
-
             </div>
-      </div>
+
+
+            <div id="fancy" class="tableContainer">
+                <table>
+                    <thead id="tableHead"></thead>
+                    <tbody id="allHoles"></tbody>
+                </table>
+                
+                 
+                <table>
+                    <thead id="scoreHead"></thead>
+                    <tbody id="scoreBody"></tbody>
+                </table>
+            </div>
+
+
+                
+        </div>
+    </div>
 
 
     <script defer src="script.js"></script>
