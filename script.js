@@ -220,9 +220,12 @@ const mostrarData = (data) => {
 
 
 
-
-document.getElementById('playerData').innerHTML = "<button onclick=\"addPlayers()\">Add Players</button>";
-
+document.getElementById('playerData').innerHTML = "<button id=\"addplayer\" onclick=\"addPlayers()\">Add Players</button>";
+// button disapear  **magic!!**
+var addplayer = document.getElementById("addplayer");
+addplayer.addEventListener("click", function() {
+  addplayer.style.display = "none";
+});
 
 
 function addPlayers() {
