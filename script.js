@@ -1,16 +1,16 @@
 let courses = [];
 
-function renderCourses() {
-fetch('courses.json').then(response => response.json())
+async function renderCourses() {
+await fetch('courses.json').then(response => response.json())
   .then(data => {
     courses = data.data.course;
     renderSelectCourse();
     const url = courses[0].url;
     return getCourseData(url)
   })
-  .then(data => mostrarData(data)).catch(error => console.log(error));
+  .then(data => mostrarData(data)).catch(error => console.log(error));   //llevarlo a que seleccione el Tee en vez de mostrarData
   }
-  renderCourses()
+  getTee()
 
 function renderSelectCourse() {
   const courseSelect = document.getElementById('course-select');
@@ -23,8 +23,9 @@ function handleOnSelect(event) {
   const course = getCourseById(selectorId);
   const url = course.url;
   getCourseData(url).then(data => mostrarData(data));
-}
-
+    //getTee());
+  };
+  
 function getCourseById(id) {
   return courses.find(course => course.id === id);
 }
@@ -34,7 +35,6 @@ function getUrlForCourse(selectorId) {
   return course.url ?? '';
 }
 
-//ES6 async?
 async function getCourseData(url) {
   const response = await fetch(url);
   const data = await response.json();
@@ -44,59 +44,25 @@ async function getCourseData(url) {
 
 
 
+//-------------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
-// menu de seleccion Tee
-function handleOnTeeSelect(event) {
-  const teeSelector = Number(event.target.value);
-  const course = getTeeByColor(selectorId);
-  const teeColor = data.holes.teeBoxes.teeColorType;
-  getCourseData(url).then(data => mostrarData(data));
-}
-  
-function getTeeByColor(teeColor) {
-  return courses.find(course => data.holes.teeBoxes.teeColorType === teeColor);
-}
-
-function getUrlForCourse(teeColorType) {
-  const course = getTeeByColor(teeColorType);
-  return course.teeColorType;
-}
 
 // select tee functions
-let teeHTML = `<select class="form-control" id="tee-select" onchange="teeSelect(this.id)">
-  <option value="initial">--Select a Tee Box--</option>`;
+let teeHTML = `<select class="form-control" id="tee-select" onchange="teeSelect(this.id)"><option value="initial">*Select tee to play*</option>`;
 
 async function getTee(){
   let course;
   try {
-      course = await loadCourse();
+      course = await renderCourses();   //donde llama el curso
   }catch (error) {
       console.log(`ERROR: ${error}`);
   };
   console.log(course.data.holes);
   console.log(course.data.holes[0].teeBoxes);
   course.data.holes[0].teeBoxes.forEach(tee => {
-      if (tee.teeColorType !== null) {
-          teeHTML += `<option value="${tee.teeColorType}">${tee.teeColorType}</option>`
-      };
+    if (tee.teeColorType !== null) {
+      teeHTML += `<option value="${tee.teeColorType}">${tee.teeColorType}</option>`
+    };
   });
   teeHTML += `</select>`;
   document.getElementById('tee-title').innerHTML = teeHTML;
@@ -111,7 +77,7 @@ async function teeSelect(clickedId) {
 
   let course;
   try {
-      course = await loadCourse();
+      course = await renderCourses();
   }catch (error) {
       console.log(`ERROR: ${error}`);
   }
@@ -132,30 +98,11 @@ async function teeSelect(clickedId) {
 
 mostrarData();
   };
+//-------------------------------------------------------------------------------
 
+// MODIFICAR QUE SOLO SELECCIONE LOS teeColorType SELECCIONADOS !NO TODOS!!!!!!!!
 
-// menu de seleccion de golf courses
-function handleOnTeeSelect(event) {
-  const teeSelector = Number(event.target.value);
-  const course = getTeeByColor(selectorId);
-  const teeColor = data.holes.teeBoxes.teeColorType;
-  getCourseData(url).then(data => mostrarData(data));
-}
-  
-function getTeeByColor(teeColor) {
-  return courses.find(course => data.holes.teeBoxes.teeColorType === teeColor);
-}
-
-
-function getUrlForCourse(teeColorType) {
-  const course = getTeeByColor(teeColorType);
-
-  //return course.url ?? '';
-  return course.teeColorType;
-}
- */
-
-
+//-------------------------------------------------------------------------------
 
 const mostrarData = (data) => {
   let body = "";
@@ -173,27 +120,27 @@ const mostrarData = (data) => {
   
   // loop through the front nine holes
   for (let i = 0; i < 9; i++) {
-    const locations = data.holes[i].changeLocations;
-    for (let j = 0; j < locations.length; j++) {
-      body += `<td>${locations[j].yards}</td>`;
-      parBody += `<td>${locations[j].par}</td>`;
-      hcpBody += `<td>${locations[j].hcp}</td>`;
-      yardSum += locations[j].yards;
-      parSum += locations[j].par;
-      hcpSum += locations[j].hcp;
+    const teeBox = data.holes[i].teeBoxes;     //holes.teeBoxes.teeColorType  -> yards, par, hcp
+    for (let j = 0; j < teeBox.length; j++) {
+      body += `<td>${teeBox[j].yards}</td>`;
+      parBody += `<td>${teeBox[j].par}</td>`;
+      hcpBody += `<td>${teeBox[j].hcp}</td>`;
+      yardSum += teeBox[j].yards;
+      parSum += teeBox[j].par;
+      hcpSum += teeBox[j].hcp;
     }
   }
 
   // loop through the back nine holes
   for (let i = 9; i < 18; i++) {
-    const locations = data.holes[i].changeLocations;
-    for (let k = 0; k < locations.length; k++) {
-      body2 += `<td>${locations[k].yards}</td>`;
-      parBody2 += `<td>${locations[k].par}</td>`;
-      hcpBody2 += `<td>${locations[k].hcp}</td>`;
-      yardSum2 += locations[k].yards;
-      parSum2 += locations[k].par;
-      hcpSum2 += locations[k].hcp;
+    const teeBox = data.holes[i].teeBoxes;
+    for (let k = 0; k < teeBox.length; k++) {
+      body2 += `<td>${teeBox[k].yards}</td>`;
+      parBody2 += `<td>${teeBox[k].par}</td>`;
+      hcpBody2 += `<td>${teeBox[k].hcp}</td>`;
+      yardSum2 += teeBox[k].yards;
+      parSum2 += teeBox[k].par;
+      hcpSum2 += teeBox[k].hcp;
     }
   }
   let totalyards = yardSum + yardSum2;
@@ -219,7 +166,6 @@ const mostrarData = (data) => {
 }
 
 
-
 // button disapear  **magic!!**
 document.getElementById('playerData').innerHTML = "<button id=\"addplayer\" onclick=\"addPlayers()\">Add Players</button>";
 var addplayer = document.getElementById("addplayer");
@@ -232,23 +178,18 @@ addplayer.addEventListener("click", function() {
 
 
 
-
-
-
-
-
+ 
 const addPlayers = () => {
+  const table = document.createElement('table');
   const tbody = document.createElement('tbody');
-  let sumOut = 0;
-  let sumIn = 0;
+  let strokeCounter = 1;
 
   for (let i = 1; i <= 4; i++) {
     const row = document.createElement('tr');
     const nameCell = document.createElement('th');
     const nameInput = document.createElement('input');
     nameInput.type = 'text';
-    /* nameInput.id = `playerName${i}`; */
-    nameInput.id = 'playersName';
+    nameInput.id = `playerName${i}`;
     nameInput.placeholder = `Player${i}`;
     nameCell.appendChild(nameInput);
     row.appendChild(nameCell);
@@ -256,11 +197,12 @@ const addPlayers = () => {
     let totalOut = 0;
     let totalIn = 0;
 
-    for (let j = 0; j <= 18; j++) {
-      const cell = document.createElement('td');
+    for (let j = 1; j <= 18; j++) {
+      const cell = document.createElement(j % 10 === 0 ? 'th' : 'td');
       const input = document.createElement('input');
       input.type = 'number';
-      input.id = 'strokes';
+      input.id = `strokes${strokeCounter}`;
+      strokeCounter++;
 
       input.addEventListener('change', () => {
         const value = parseInt(input.value) || 0;
@@ -271,17 +213,7 @@ const addPlayers = () => {
         }
         row.childNodes[10].textContent = totalOut;
         row.childNodes[20].textContent = totalIn;
-        row.lastChild.textContent = totalOut + totalIn;
-
-        sumOut = 0;
-        sumIn = 0;
-        tbody.childNodes.forEach((row) => {
-          sumOut += parseInt(row.childNodes[10].textContent);
-          sumIn += parseInt(row.childNodes[20].textContent);
-        });
-        document.getElementById('outHeader').textContent = sumOut;
-        document.getElementById('inHeader').textContent = sumIn;
-        document.getElementById('totalHeader').textContent = sumOut + sumIn;
+        row.childNodes[21].textContent = totalOut + totalIn;
       });
 
       cell.appendChild(input);
@@ -298,12 +230,10 @@ const addPlayers = () => {
     row.appendChild(totalCell);
     tbody.appendChild(row);
   }
-  
-  document.getElementById('scoreHead').innerHTML = '<th>Name</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>In</th><th>Total</th>';
 
-  const scoreBody = document.getElementById('scoreBody');
-  scoreBody.innerHTML = '';
-  scoreBody.appendChild(tbody);
+  table.innerHTML = '<thead><th>Name</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>In</th><th>Total</th></thead>';
+  table.appendChild(tbody);
+  document.getElementById('scoreCard').appendChild(table);
 }
 
 
@@ -312,6 +242,10 @@ const addPlayers = () => {
 
 
 
+
+  /* const scoreBody = document.getElementById('scoreCard');
+  scoreBody.innerHTML = '';
+  scoreBody.appendChild(tbody); */
 
 
 

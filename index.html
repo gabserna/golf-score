@@ -37,10 +37,9 @@
                     <div class="form-group">
                         <label for="course-select">Select Course:</label><br>
                         <select class="form-control" id="course-select" onselect="handleOnSelect(event)"></select><br><br>
-                        
-                        <label for="tee-select">Select a Tee:</label><br>
-                        <select class="form-control" id="tee-select" onchange="teeSelect(this.id)"></select><br><br>
-                        <!-- <option value="initial">*Choose a Tee Box*</option> -->
+
+                        <div id="tee-title"></div>      <!-- Aqui va seleccion de Tee's-->
+
                         <div id="playerData"></div>  <!-- Aqui va boton de addPlayers-->
                     </div>
 
@@ -55,9 +54,9 @@
                 </table>
                 
                  
-                <table class="playerScoreTable">
-                    <thead id="scoreHead"></thead>
-                    <tbody id="scoreBody"></tbody>
+                <table id="scoreCard" class="playerScoreTable">
+                    <!-- <thead id="scoreHead"></thead>
+                    <tbody id="scoreBody"></tbody> -->
                 </table>
             </div>
 
