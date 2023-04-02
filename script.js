@@ -6,6 +6,7 @@ await fetch('courses.json').then(response => response.json())
     courses = data.data.course;
     renderSelectCourse();
     const url = courses[0].url;
+    console.log(url);
     return getCourseData(url)
   })
   .then(data => mostrarData(data)).catch(error => console.log(error));   //llevarlo a que seleccione el Tee en vez de mostrarData
@@ -22,6 +23,7 @@ function handleOnSelect(event) {
   const selectorId = Number(event.target.value);
   const course = getCourseById(selectorId);
   const url = course.url;
+  // console.log(url);
   getCourseData(url).then(data => mostrarData(data));
     //getTee());
   };
@@ -47,57 +49,7 @@ async function getCourseData(url) {
 //-------------------------------------------------------------------------------
 
 
-// select tee functions
-let teeHTML = `<select class="form-control" id="tee-select" onchange="teeSelect(this.id)"><option value="initial">*Select tee to play*</option>`;
 
-async function getTee(){
-  let course;
-  try {
-      course = await renderCourses();   //donde llama el curso
-  }catch (error) {
-      console.log(`ERROR: ${error}`);
-  };
-  console.log(course.data.holes);
-  console.log(course.data.holes[0].teeBoxes);
-  course.data.holes[0].teeBoxes.forEach(tee => {
-    if (tee.teeColorType !== null) {
-      teeHTML += `<option value="${tee.teeColorType}">${tee.teeColorType}</option>`
-    };
-  });
-  teeHTML += `</select>`;
-  document.getElementById('tee-title').innerHTML = teeHTML;
-};
-
-async function teeSelect(clickedId) {
-  const teeTitle = document.getElementById('tee-title');
-  let color = document.getElementById(clickedId).value
-  teeTitle.innerHTML = "Tee Box: " + document.getElementById(clickedId).value; 
-
-
-
-  let course;
-  try {
-      course = await renderCourses();
-  }catch (error) {
-      console.log(`ERROR: ${error}`);
-  }
-  let correctHoles = []
-  course.data.holes.forEach(hole => {
-      hole.teeBoxes.forEach(box => {
-          if (box.teeColorType === color) {
-              correctHoles.push({
-                  id: box.courseHoleId,
-                  name: '',
-                  yardage: box.yards,
-                  par: box.par,
-                  handicap: box.hcp,
-          })
-          }
-      })
-  })
-
-mostrarData();
-  };
 //-------------------------------------------------------------------------------
 
 // MODIFICAR QUE SOLO SELECCIONE LOS teeColorType SELECCIONADOS !NO TODOS!!!!!!!!
@@ -130,6 +82,7 @@ const mostrarData = (data) => {
       hcpSum += teeBox[j].hcp;
     }
   }
+
 
   // loop through the back nine holes
   for (let i = 9; i < 18; i++) {
@@ -279,3 +232,62 @@ console.log(golfScore(4, 15));
 toastr.success(`${playerName}, you are (L)PGA Tour material`);
 */
 
+
+
+
+
+
+
+
+
+// select tee functions
+let teeHTML = `<select class="form-control" id="tee-select" onchange="teeSelect(this.id)"><option value="initial">*Select tee to play*</option>`;
+
+async function getTee(){
+  let course;
+  try {
+      course = await renderCourses();   //donde llama el curso
+  }catch (error) {
+      console.log(`ERROR: ${error}`);
+  };
+  console.log(course.data.holes);
+  console.log(course.data.holes[0].teeBoxes);
+  course.data.holes[0].teeBoxes.forEach(tee => {
+    if (tee.teeColorType !== null) {
+      teeHTML += `<option value="${tee.teeColorType}">${tee.teeColorType}</option>`
+    };
+  });
+  teeHTML += `</select>`;
+  document.getElementById('tee-title').innerHTML = teeHTML;
+};
+
+async function teeSelect(clickedId) {
+  const teeTitle = document.getElementById('tee-title');
+  let color = document.getElementById(clickedId).value
+  teeTitle.innerHTML = "Tee Box: " + document.getElementById(clickedId).value; 
+
+
+
+  let course;
+  try {
+      course = await renderCourses();
+  }catch (error) {
+      console.log(`ERROR: ${error}`);
+  }
+  let correctHoles = []
+  course.data.holes.forEach(hole => {
+      hole.teeBoxes.forEach(box => {
+          if (box.teeColorType === color) {
+              correctHoles.push({
+                  id: box.courseHoleId,
+                  name: '',
+                  yardage: box.yards,
+                  par: box.par,
+                  handicap: box.hcp,
+          })
+          }
+      })
+  })
+
+mostrarData();
+  };
