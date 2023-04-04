@@ -1,18 +1,18 @@
 { "data": {
   "course": [
     {
-      "id": 11819,
-      "name": "Thanksgiving Point Golf Course - Lehi, UT",
+      "id": "id11819",
+      "courseName": "Thanksgiving Point Golf Course - Lehi, UT",
       "url": "https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/course11819.json"
     },
     {
-      "id": 18300,
-      "name": "Fox Hollow Golf Course - American Fork, UT",
+      "id": "id18300",
+      "courseName": "Fox Hollow Golf Course - American Fork, UT",
       "url": "https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/course18300.json"
     },
     {
-      "id": 19002,
-      "name": "Spanish Oaks Golf Course - Spanish Fork, UT",
+      "id": "id19002",
+      "courseName": "Spanish Oaks Golf Course - Spanish Fork, UT",
       "url": "https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/course19002.json"
     }
   ]}}
