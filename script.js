@@ -2,7 +2,8 @@ async function loadCourse() {
   const response = await fetch('courses.json');
   const data = await response.json();
   return data.data.course;
-}  
+}
+
 const select = document.getElementById('course-select');
 const courseTitle = document.getElementById('course-title');
 let url;
@@ -46,11 +47,11 @@ async function teeSelect(clickedId) {
 
   let course;
   try {
-    const response = await fetch('https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/course19002.json');
+    const response = await fetch('https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/course11819.json');     //courses.json
     course = await response.json();
     if (!course || !course.holes || !Array.isArray(course.holes)) {
       console.log(course);
-      throw new Error('Invalid course data');
+      throw new Error('nothing to show...!!');
     }
   } catch (error) {
     console.log(`ERROR: ${error}`);
@@ -74,22 +75,22 @@ async function teeSelect(clickedId) {
     }
   });
 
-  renderAPI(teeType);
+  showScoreCard(teeType);
 }
 
 
 
 
-async function renderAPI(teeType) {
+async function showScoreCard(teeType) {
   // declarations 
   
-  let frontHoles = document.getElementById('front-holes');
+  let frontHoles = document.getElementById('frontNine');
   
   let frontYardage = document.getElementById('outYards');
   let frontPar = document.getElementById('outPar');
   let frontHandicap = document.getElementById('outHcp');
   
-  let backHoles = document.getElementById('back-holes');
+  let backHoles = document.getElementById('backNine');
   let backYardage = document.getElementById('back-yardage');
   let backPar = document.getElementById('back-par');
   let backHandicap = document.getElementById('back-handicap');
@@ -117,9 +118,6 @@ async function renderAPI(teeType) {
   let inHcp = 0;
   let totalPar = 0;
   let totalHcp = 0;
-  
-  document.getElementById('frontNine').style.display = 'initial';
-  document.getElementById('backNine').style.display = 'initial';
 
   let course;
   try {
@@ -173,7 +171,7 @@ for (let i = 0; i < teeType.length; i++) {
 
 // button disapear
 function createButtonAddPlayers() {
-document.getElementById('playerData').innerHTML = "<button id=\"addplayer\" onclick=\"renderPlayers()\">Add Players</button>";
+document.getElementById('playerData').innerHTML = "<button id=\"addplayer\" onclick=\"addPlayers()\">Add Players</button>";
 var addplayer = document.getElementById("addplayer");
 addplayer.addEventListener("click", function() {
 addplayer.style.display = "none";
@@ -182,10 +180,7 @@ addplayer.style.display = "none";
 
 
 
-
-
-//addPlayers   CAMBIAR NOMBRE!!!!!!!!!!
-const renderPlayers = () => {
+const addPlayers = () => {
 const table = document.createElement('table');
 const tbody = document.createElement('tbody');
 let strokeCounter = 1;
