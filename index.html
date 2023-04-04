@@ -20,16 +20,17 @@
 <body>
     <div class="main">
       <div class="bgnd-container">
-            <div class="bgnd">
-                <img class="bgnd-image" src="img/golf-course.jpg" alt="banner">
-            </div>
+        <div class="bgnd">
+          <img class="bgnd-image" src="img/golf-course.jpg" alt="banner">
         </div>
-        <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
+      </div>
+      <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
         <div class="titler">
           <div class="myh1">
-              <h1 class="main-title">Golf Score App!</h1>
+            <h1 class="main-title">Golf Score App!</h1>
           </div>
           <div class="selector">
+            <button id="reset" onclick="location.reload()">Reset</button>
               <h1 class="form-group" id="course-title">
                   <select class="form-control" id="course-select">
                       <option value="initial">&#171; SELECT YOUR COURSE &#187;</option>
@@ -48,25 +49,29 @@
       <div class="fancy" id="scorecard">
         <table class="table table-bordered">
           <div id="frontNine"></div>
-          <thead><tr id="front-holes"></tr></thead>
+          <thead>
+            <tr id="front-holes"></tr>
+          </thead>
           <tbody>
-                        <tr id="outYards"></tr>
-                        <tr id="outPar"></tr>
-                        <tr id="outHcp"></tr>
-                      </tbody>
-                      <tbody></tbody>
-                    </table>
-                    
-                    <div id="backNine"></div>
-                    <table class="table table-bordered">
-                      <thead><tr id="back-holes"></tr></thead>
-                      <tbody>
-                        <tr id="back-yardage"></tr>
-                        <tr id="back-par"></tr>
-                        <tr id="back-handicap"></tr>
-                      </tbody>
-                      <tbody id="back-body"></tbody>
-                    </table>
+            <tr id="outYards"></tr>
+            <tr id="outPar"></tr>
+            <tr id="outHcp"></tr>
+          </tbody>
+          <tbody></tbody>
+        </table>
+    
+        <div id="backNine"></div>
+        <table class="table table-bordered">
+          <thead>
+            <tr id="back-holes"></tr>
+          </thead>
+          <tbody>
+            <tr id="back-yardage"></tr>
+            <tr id="back-par"></tr>
+            <tr id="back-handicap"></tr>
+          </tbody>
+          <tbody id="back-body"></tbody>
+        </table>
       </div>
     </div>
 

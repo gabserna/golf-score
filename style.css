@@ -61,11 +61,10 @@ body {
   z-index: 2;
 }
 .main .container .titler .selector {
-  height: 2.5em;
+  height: 6em;
   margin-top: 5em;
 }
 .main .container .titler .selector #course-title {
-  /* border: 2px solid red; */
   font-size: 2vw !important;
   font-weight: bolder;
   color: #fff;
@@ -78,7 +77,7 @@ body {
 }
 .main .container .teeSelection {
   position: absolute;
-  top: 9em;
+  top: 10em;
   left: 22vw;
   color: #fff;
 }
@@ -95,13 +94,13 @@ body {
   flex-direction: row;
 }
 
-#addplayer {
-  width: 8em;
-  height: 2.5em;
+#addplayer, #reset {
+  width: 7em;
+  height: 1.5em;
   background-color: #008000;
   color: #fff;
   font-weight: bold;
-  border-radius: 20px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
 }
