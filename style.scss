@@ -5,9 +5,17 @@ body {
     background-color: #000000;
     color: #fff;
     font-family: 'Heebo', sans-serif;
+    font-weight: bolder;
+    box-sizing: border-box;
+    background-size: cover;
 }
 
 .main {
+    margin: 0 auto;
+    width: 95%;
+    /* background-color: #4d9f1b; */
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
     padding: 0 1vw 0 1vw;
     position: relative;
@@ -41,38 +49,67 @@ body {
             width: 70%;
             height: 10vh;
             flex-direction: row;
-            top: 10vh;
             left: 20vw;
-
+            top: 2vh;
+            
             .myh1 {
                 h1 {
+                    top: -8vh;
                     right: 3vw;
                     color: #fff;
                     margin: 0;
-                    padding: 0;
-                    font-size: 5vw;
+                    padding: 0.5em;
+                    /* font-size: 5vw; */
+                    font: italic bold 5vw 'Heebo', sans-serif;
                     position: absolute;
                     /* border: 2px solid blue; */
                     z-index: 2;
                 }
             }
             .selector {
-                padding: 0;
+                height: 2.5em;
+                margin-top: 5em;
+                
+                #course-title {
+                    /* border: 2px solid red; */
+                    font-size: 2vw !important;
+                    font-weight: bolder;
+                    color: #fff;
+                    margin: 0;
+                }
             }
         }
         .tableContainer, .playerScoreTable {
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            /* border: 2px solid greenyellow; */
         }
         
+        .teeSelection {
+            position: absolute;
+            top: 9em;
+            left: 22vw;
+            color: #fff;
+        }
     }
 }
 
+
+#scorecard {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: #000;     /*fondo de la tabla*/
+}
+
+.theScoreCard {
+    display: flex;
+    flex-direction: row;
+}
+
 #addplayer { //button
-    width: 10em;
-    height: 3em;
+    width: 8em;
+    height: 2.5em;
     background-color: #008000;
     color: #fff;
     font-weight: bold;
@@ -87,10 +124,9 @@ body {
     text-transform: uppercase;
 }
 
-
-#fancy, .playerScoreTable {
+.fancy, .playerScoreTable {
     width: auto;
-    height: auto;   //revisar si es suficiente..........!!!!!!
+    
     margin: 0 auto;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -98,23 +134,23 @@ body {
     text-align: center;
 }
 
-#fancy th {
+.fancy th {
     background-color: #008000;
     text-align: center;
     color: white;
     padding: 1vh 1vh;
 }
-#fancy td, #fancy th {
+.fancy td, .fancy th {
     border-collapse: collapse;
     width: 4vw;
     border: 1px solid #ddd;
 }
-  
-#fancy tr:hover {
+
+.fancy tr:hover {
     background-color: #dedede;
     color: #000000;
 }
-  
+
 #course-select {
     width: 25em;
 }
