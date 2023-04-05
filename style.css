@@ -111,7 +111,7 @@ body {
   text-transform: uppercase;
 }
 
-.fancy, .playerScoreTable {
+#fancy, .playerScoreTable {
   width: auto;
   margin: 0 auto;
   padding: 0;
@@ -120,20 +120,20 @@ body {
   text-align: center;
 }
 
-.fancy th {
+#fancy th {
   background-color: #008000;
   text-align: center;
   color: white;
   padding: 1vh 1vh;
 }
 
-.fancy td, .fancy th {
+#fancy td, #fancy th {
   border-collapse: collapse;
   width: 4vw;
   border: 1px solid #ddd;
 }
 
-.fancy tr:hover {
+#fancy tr:hover {
   background-color: #dedede;
   color: #000000;
 }
@@ -179,29 +179,22 @@ td:nth-child(22) {
   display: flex;
 }
 
-#fancy {
-  width: auto;
-  margin: 0 auto;
-  padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  table-layout: fixed;
-  text-align: center;
-}
+/* 
+remover !!!!!!
 
-#fancy th {
-  background-color: #008000;
-  text-align: center;
-  color: white;
-  padding: 1vh 1vh;
-}
+        .theScoreCard
+        .fancy
 
-#fancy td, #fancy th {
-  border-collapse: collapse;
-  width: 4vw;
-  border: 1px solid #ddd;
-}
+        id:
+        scorecard
+        frontNine
+        outYards
+        outPar
+        outHcp
+        backNine
+        inYards
+        inPar
+        inHcp
 
-#fancy tr:hover {
-  background-color: #dedede;
-  color: #000000;
-}/*# sourceMappingURL=style.css.map */
+    remover !!!!!!
+ *//*# sourceMappingURL=style.css.map */

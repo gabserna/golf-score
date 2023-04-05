@@ -63,12 +63,7 @@ async function teeSelect(clickedId) {
     if (hole && hole.teeBoxes) {
       hole.teeBoxes.forEach(teeBox => {
         if (teeBox && teeBox.teeColorType === color) {
-          teeType.push({
-            id: teeBox.courseHoleId,
-            name: '',
-            yardage: teeBox.yards,
-            par: teeBox.par,
-            handicap: teeBox.hcp,
+          teeType.push({ id: teeBox.courseHoleId, name: '', teeBoxYards: teeBox.yards, teeBoxPar: teeBox.par, teeBoxHcp: teeBox.hcp,
           });
         }
       });
@@ -106,20 +101,20 @@ async function showScoreCard(teeType) {
 console.log(teeType)
 for (let i = 0; i < teeType.length; i++) {
     if (i < 9) {
-      body += `<td>${teeType[i].yardage}</td>`;
-      parBody += `<td>${teeType[i].par}</td>`;
-      hcpBody += `<td>${teeType[i].handicap}</td>`;
-      yardSum += teeType[i].yardage;
-      parSum += teeType[i].par;
-      hcpSum += teeType[i].handicap;
+      body += `<td>${teeType[i].teeBoxYards}</td>`;
+      parBody += `<td>${teeType[i].teeBoxPar}</td>`;
+      hcpBody += `<td>${teeType[i].teeBoxHcp}</td>`;
+      yardSum += teeType[i].teeBoxYards;
+      parSum += teeType[i].teeBoxPar;
+      hcpSum += teeType[i].teeBoxHcp;
     }
       else {
-        body2 += `<td>${teeType[i].yardage}</td>`;
-        parBody2 += `<td>${teeType[i].par}</td>`;
-        hcpBody2 += `<td>${teeType[i].handicap}</td>`;
-        yardSum2 += teeType[i].yardage;
-        parSum2 += teeType[i].par;
-        hcpSum2 += teeType[i].handicap;
+        body2 += `<td>${teeType[i].teeBoxYards}</td>`;
+        parBody2 += `<td>${teeType[i].teeBoxPar}</td>`;
+        hcpBody2 += `<td>${teeType[i].teeBoxHcp}</td>`;
+        yardSum2 += teeType[i].teeBoxYards;
+        parSum2 += teeType[i].teeBoxPar;
+        hcpSum2 += teeType[i].teeBoxHcp;
       }
   };
 
@@ -147,7 +142,7 @@ for (let i = 0; i < teeType.length; i++) {
 // boton agregar jugadores
 function createButtonAddPlayers() {
 document.getElementById('playerData').innerHTML = "<button id=\"addplayer\" onclick=\"addPlayers()\">Add Players</button>";
-var addplayer = document.getElementById("addplayer");
+let addplayer = document.getElementById("addplayer");
 addplayer.addEventListener("click", function() {
 addplayer.style.display = "none";
 })
@@ -158,7 +153,7 @@ addplayer.style.display = "none";
 const addPlayers = () => {
 const table = document.createElement('table');
 const tbody = document.createElement('tbody');
-let strokeCounter = 1;
+let contadorGolpes = 1;
 
 for (let i = 1; i <= 4; i++) {
   const row = document.createElement('tr');
@@ -177,8 +172,8 @@ for (let i = 1; i <= 4; i++) {
     const cell = document.createElement(j % 10 === 0 ? 'th' : 'td');
     const input = document.createElement('input');
     input.type = 'number';
-    input.id = `strokes${strokeCounter}`;
-    strokeCounter++;
+    input.id = `golpe${contadorGolpes}`;
+    contadorGolpes++;
 
     input.addEventListener('change', () => {
       const value = parseInt(input.value) || 0;
