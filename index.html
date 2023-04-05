@@ -10,22 +10,22 @@
     
     <script src="https://kit.fontawesome.com/1553130d2f.js" crossorigin="anonymous"></script>
 
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
-    <!-- <link rel="stylesheet" href="/toastr/toastr.min.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/toastr/toastr.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Golf Score App</title>
 </head>
 <body>
-    <div class="main">
+    <div class="main m-0-auto p-0">   <!-- revisar estilos de bootstrap! -->
       <div class="bgnd-container">
         <div class="bgnd">
           <img class="bgnd-image" src="img/golf-course.jpg" alt="banner">
         </div>
       </div>
 
-      <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
+      <div class="container">
         <div class="titler">
           <div class="myh1">
             <h1 class="main-title">Golf Score App!</h1>
@@ -45,24 +45,27 @@
       </div>
    
       
-      <div class="tables-container">
-        <table id="fancy">
-          <thead id="table-header1"></thead>
-          <tbody id="holes0-9"></tbody>
-        </table>
+      <div class="table-condensed table-striped m-0-auto p-0">
+        <div class="tables-container">
+          <table id="fancy" class="table">
+            <thead id="table-header1"></thead>
+            <tbody id="frontNine" class="text-light"></tbody>
+          </table>
+          
+          <table id="fancy" class="table">
+            <thead id="table-header2"></thead>
+            <tbody id="backNine" class="text-light"></tbody>
+          </table>
+        </div>
+
+        <div id="playerData"></div>  <!-- Aqui va boton de addPlayers-->
         
-        <table id="fancy">
-          <thead id="table-header2"></thead>
-          <tbody id="holes10-18"></tbody>
-        </table>
-      </div>
-      <div id="playerData"></div>  <!-- Aqui va boton de addPlayers-->
-
-      <div id="fancy" class="tableContainer">
-          <table><tbody id="allHoles"></tbody></table>
-          <table id="scoreCard" class="playerScoreTable"></table>
-      </div>
-
+        <div id="fancy" class="tables-container">
+          <table id="fancy" class="table">
+            <tbody id="allHoles"></tbody></table>
+            <table id="scoreCard" class="playerScoreTable text-center"></table>
+          </div>
+        </div>
   </div>
 
   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>               -->
