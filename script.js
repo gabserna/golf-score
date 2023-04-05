@@ -79,7 +79,7 @@ async function teeSelect(clickedId) {
 }
 
 
-// version modificada!!!!!!!
+// version corregida!!!!!!!
 async function showScoreCard(teeType) {
   let body = "";
   let parBody = "";
@@ -103,7 +103,6 @@ async function showScoreCard(teeType) {
     console.log(`ERROR: ${error}`);
   }
 
-  // loop through teeType and build out the card
 console.log(teeType)
 for (let i = 0; i < teeType.length; i++) {
     if (i < 9) {
@@ -145,7 +144,7 @@ for (let i = 0; i < teeType.length; i++) {
 }
 
 
-// button disapear
+// boton agregar jugadores
 function createButtonAddPlayers() {
 document.getElementById('playerData').innerHTML = "<button id=\"addplayer\" onclick=\"addPlayers()\">Add Players</button>";
 var addplayer = document.getElementById("addplayer");
