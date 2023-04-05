@@ -173,4 +173,35 @@ td:nth-child(21),
 td:nth-child(22) {
   background-color: #008000;
   color: #fff;
+}
+
+.tables-container {
+  display: flex;
+}
+
+#fancy {
+  width: auto;
+  margin: 0 auto;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  table-layout: fixed;
+  text-align: center;
+}
+
+#fancy th {
+  background-color: #008000;
+  text-align: center;
+  color: white;
+  padding: 1vh 1vh;
+}
+
+#fancy td, #fancy th {
+  border-collapse: collapse;
+  width: 4vw;
+  border: 1px solid #ddd;
+}
+
+#fancy tr:hover {
+  background-color: #dedede;
+  color: #000000;
 }/*# sourceMappingURL=style.css.map */

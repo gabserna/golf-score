@@ -1,5 +1,5 @@
 async function loadCourse() {
-  const response = await fetch('courses.json');
+  const response = await fetch('courses.json');     // https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/courses.json   --url principal--
   const data = await response.json();
   return data.data.course;
 }
@@ -47,7 +47,7 @@ async function teeSelect(clickedId) {
 
   let course;
   try {
-    const response = await fetch('https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/course11819.json');     //courses.json
+    const response = await fetch('https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/course11819.json');  // debe venir de courses.json o del url principal
     course = await response.json();
     if (!course || !course.holes || !Array.isArray(course.holes)) {
       console.log(course);
@@ -79,94 +79,70 @@ async function teeSelect(clickedId) {
 }
 
 
-
-
+// version modificada!!!!!!!
 async function showScoreCard(teeType) {
-  // declarations 
-  
-  let frontHoles = document.getElementById('frontNine');
-  
-  let frontYardage = document.getElementById('outYards');
-  let frontPar = document.getElementById('outPar');
-  let frontHandicap = document.getElementById('outHcp');
-  
-  let backHoles = document.getElementById('backNine');
-  let backYardage = document.getElementById('back-yardage');
-  let backPar = document.getElementById('back-par');
-  let backHandicap = document.getElementById('back-handicap');
-    
-  let frontHolesHTML = `<th>Holes</th>`
-  let frontYardageHTML= `<th>Yards</th>`
-  let frontParHTML = `<th>Par</th>`
-  let frontHandicapHTML = `<th>Hcp</th>`
-  
-  //-----------------------------------------------
-  let backHolesHTML = "";
-  let backYardageHTML = "";
-  let backParHTML = "";
-  let backHandicapHTML = "";
-  //-----------------------------------------------
-  
-  let outYardage = 0;
-  let inYardage = 0;
-  let totalYardage = 0;
-  
-  let outPar = 0;
-  let inPar = 0;
+  let body = "";
+  let parBody = "";
+  let hcpBody = "";
+  let yardSum = 0;
+  let parSum = 0;
+  let hcpSum = 0;
+  let body2 = "";
+  let parBody2 = "";
+  let hcpBody2 = "";
+  let yardSum2 = 0;
+  let parSum2 = 0;
+  let hcpSum2 = 0;
+  let totalyards = yardSum + yardSum2;
+  let totalpar = parSum + parSum2;
+  let totalhcp = hcpSum + hcpSum2;
 
-  let outHcp = 0;
-  let inHcp = 0;
-  let totalPar = 0;
-  let totalHcp = 0;
-
-  let course;
   try {
-      course = await loadCourse();
-  }catch (error) {
-      console.log(`ERROR: ${error}`);
+    course = await loadCourse();
+  } catch (error) {
+    console.log(`ERROR: ${error}`);
   }
-  
-// loop through teeType and build out the card
+
+  // loop through teeType and build out the card
 console.log(teeType)
 for (let i = 0; i < teeType.length; i++) {
-  if (i < 9) {
-      frontHolesHTML += `<th>${i + 1}</th>`
-      frontYardageHTML += `<td>${teeType[i].yardage}</td>`
-      frontParHTML += `<td>${teeType[i].par}</td>`
-      frontHandicapHTML += `<td>${teeType[i].handicap}</td>`
-      outYardage += teeType[i].yardage;
-      outPar += teeType[i].par
-      outHcp += teeType[i].handicap
-      totalYardage += teeType[i].yardage
-      totalPar += teeType[i].par
-  } else {
-      backHolesHTML += `<th>${i + 1}</th>`
-      backYardageHTML += `<td>${teeType[i].yardage}</td>`
-      backParHTML += `<td>${teeType[i].par}</td>`
-      backHandicapHTML += `<td>${teeType[i].handicap}</td>`
-      inYardage += teeType[i].yardage;
-      inPar += teeType[i].par
-      inHcp += teeType[i].handicap
-      totalYardage += teeType[i].yardage
-      totalPar += teeType[i].par
-      totalHcp += teeType[i].handicap
-  }
-}
+    if (i < 9) {
+      body += `<td>${teeType[i].yardage}</td>`;
+      parBody += `<td>${teeType[i].par}</td>`;
+      hcpBody += `<td>${teeType[i].handicap}</td>`;
+      yardSum += teeType[i].yardage;
+      parSum += teeType[i].par;
+      hcpSum += teeType[i].handicap;
+    }
+      else {
+        body2 += `<td>${teeType[i].yardage}</td>`;
+        parBody2 += `<td>${teeType[i].par}</td>`;
+        hcpBody2 += `<td>${teeType[i].handicap}</td>`;
+        yardSum2 += teeType[i].yardage;
+        parSum2 += teeType[i].par;
+        hcpSum2 += teeType[i].handicap;
+      }
+  };
 
-  frontHoles.innerHTML = frontHolesHTML + `<th>Out</th>`;
-  frontYardage.innerHTML = frontYardageHTML + `<td>${outYardage}</td>`;
-  frontPar.innerHTML = frontParHTML + `<td>${outPar}</td>`;
-  frontHandicap.innerHTML = frontHandicapHTML + `<td>${outHcp}</td>`;
+  body2 += `<th>${yardSum2}</th>`;
+  parBody2 += `<th>${parSum2}</th>`;
+  hcpBody2 += `<th>${hcpSum2}</th>`;
 
-  backHoles.innerHTML = backHolesHTML + `<th>In</th><th>Total</th>`;
-  backYardage.innerHTML = backYardageHTML + `<td>${inYardage}</td><td>${totalYardage}</td>`;
-  backPar.innerHTML = backParHTML + `<td>${inPar}</td><td>${totalPar}</td>`;
-  backHandicap.innerHTML = backHandicapHTML + `<td>${inHcp}</td><td>${totalHcp}</td>`;
+  body2 += `<th>${totalyards}</th>`;
+  parBody2 += `<th>${totalpar}</th>`;
+  hcpBody2 += `<th>${totalhcp}</th>`;
+
+  body += `<th>${yardSum}</th>`;
+  parBody += `<th>${parSum}</th>`;
+  hcpBody += `<th>${hcpSum}</th>`;
+  document.getElementById('table-header1').innerHTML = `<th id="subtitler" colspan="11">Front Nine</th><tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
+  document.getElementById('holes0-9').innerHTML = "<tr><th>Yards</th>" + body + "</tr><tr><th>Par</th>" + parBody + "</tr><tr><th>Hcp</th>" + hcpBody + "</tr>";
+
+  document.getElementById('table-header2').innerHTML = `<th id="subtitler" colspan="11">Back Nine</th><tr><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>In</th><th>Total</th></tr>`;
+  document.getElementById('holes10-18').innerHTML = "<tr>" + body2 + "</tr><tr>" + parBody2 + "</tr><tr>" + hcpBody2 + "</tr>";
 
   createButtonAddPlayers();
 }
-
-
 
 
 // button disapear
