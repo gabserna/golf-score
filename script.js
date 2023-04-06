@@ -170,7 +170,7 @@ for (let i = 1; i <= 4; i++) {
   const nameInput = document.createElement('input');
   nameInput.type = 'text';
   nameInput.id = `playerName${i}`;
-  nameInput.placeholder = `Name`;
+  nameInput.placeholder = `Name${i}`;
   nameCell.appendChild(nameInput);
   row.appendChild(nameCell);
 
@@ -190,11 +190,12 @@ for (let i = 1; i <= 4; i++) {
         totalOut += value;
       } else {
         totalIn += value;
-      }
+      }     
       row.childNodes[10].textContent = totalOut;
       row.childNodes[20].textContent = totalIn;
       row.childNodes[21].textContent = totalOut + totalIn;
     });
+
 
     cell.appendChild(input);
     row.appendChild(cell);
