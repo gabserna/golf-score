@@ -165,7 +165,7 @@ input {
   margin: 0;
   padding: 0;
   width: 2.5em;
-  background-color: red;
+  background-color: #99d98c;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -178,8 +178,4 @@ td:nth-child(21),
 td:nth-child(22) {
   background-color: #008000;
   color: #fff;
-}
-
-.tables-container {
-  display: flex;
 }/*# sourceMappingURL=style.css.map */

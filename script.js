@@ -138,17 +138,17 @@ for (let i = 0; i < teeType.length; i++) {
   body += `<th>${yardSum}</th>`;
   parBody += `<th>${parSum}</th>`;
   hcpBody += `<th>${hcpSum}</th>`;
-  document.getElementById('table-header1').innerHTML = `<th id="subtitler" colspan="11">Front Nine</th><tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th></tr>`;
-  document.getElementById('frontNine').innerHTML = "<tr><th>Yards</th>" + body + "</tr><tr><th>Par</th>" + parBody + "</tr><tr><th>Hcp</th>" + hcpBody + "</tr>";
 
-  document.getElementById('table-header2').innerHTML = `<th id="subtitler" colspan="11">Back Nine</th><tr><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>In</th><th>Total</th></tr>`;
-  document.getElementById('backNine').innerHTML = "<tr>" + body2 + "</tr><tr>" + parBody2 + "</tr><tr>" + hcpBody2 + "</tr>";
+  document.getElementById('tableHead').innerHTML = `<th id="subtitler" colspan="11">Front Nine</th><th id="subtitler" colspan="11">Back Nine</th><tr><th>Hole</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>In</th><th>Total</th></tr>`;
+
+  document.getElementById('allNine').innerHTML = "<tr><th>Yards</th>" + body + body2 + "</tr><tr><th>Par</th>" + parBody + parBody2 + "</tr><tr><th>Hcp</th>" + hcpBody + hcpBody2 + "</tr>";
 
   createButtonAddPlayers();
 }
 
+//button to addplayers table
 function createButtonAddPlayers() {
-document.getElementById('playerData').innerHTML = "<button id=\"addplayer\" onclick=\"addPlayers()\">Add Players</button>";
+document.getElementById('playerData').innerHTML = "<button class=\"btn btn-success btn-sm my-2\" id=\"addplayer\" onclick=\"addPlayers()\">Add Players</button>";
 let addplayer = document.getElementById("addplayer");
 addplayer.addEventListener("click", function() {
 addplayer.style.display = "none";
@@ -156,7 +156,7 @@ addplayer.style.display = "none";
 };
 
 
-
+//addplayers table
 const addPlayers = () => {
 const table = document.createElement('table');
 const tbody = document.createElement('tbody');
@@ -208,9 +208,10 @@ for (let i = 1; i <= 4; i++) {
   row.appendChild(totalCell);
   tbody.appendChild(row);
 }
-
 //Encabezados--------------------------------------------------
-const frontNine = document.getElementById('frontNine')
+
+
+const allNine = document.getElementById('allNine')
 let tr = document.createElement('tr')
 let th = document.createElement('th')
 th.textContent= 'Name'
@@ -240,7 +241,7 @@ th = document.createElement('th')
 th.textContent= 'Total'
 tr.appendChild(th)
 
-frontNine.appendChild(tr)
+allNine.appendChild(tr)
 //Fin de encabezados
 
 
@@ -277,7 +278,7 @@ for(let x=0; x<=3; x++){
     row.appendChild(td)
     td = document.createElement('td')
     row.appendChild(td)
-    frontNine.appendChild(row)
+    allNine.appendChild(row)
   }
 
 
