@@ -161,6 +161,13 @@ input {
   width: 1.5vw;
 }
 
+#playerName {
+  margin: 0;
+  padding: 0;
+  width: 2.5em;
+  background-color: red;
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
