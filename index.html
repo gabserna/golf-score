@@ -7,18 +7,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&family=Roboto:ital,wght@0,300;0,500;1,900&display=swap" rel="stylesheet">
-    
-    <script src="https://kit.fontawesome.com/1553130d2f.js" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/toastr/toastr.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Golf Score App</title>
+    <title>2P2 - Golf Score App</title>
 </head>
 <body>
-    <div class="main m-0-auto p-0">   <!-- revisar estilos de bootstrap! -->
+    <div class="main m-0-auto p-0">
       <div class="bgnd-container">
         <div class="bgnd">
           <img class="bgnd-image" src="img/golf-course.jpg" alt="banner">
@@ -32,35 +29,36 @@
           </div>
           <div class="selector">
             <button class="btn btn-success btn-sm my-2" id="reset" onclick="location.reload()">Reset</button>
-            <h1 class="form-group" id="course-title">
+            <div class="form-group" id="course-title">
             <select class="form-control" id="course-select">
               <option value="initial">&#171; SELECT YOUR COURSE &#187;</option>
             </select>
           </div>
         </div>
-        <div class="teeSelection my-4" id="tee-title"></div>      <!-- Aqui va seleccion de Tee's-->
+        <div class="teeSelection my-4" id="tee-title"></div>      <!-- seleccion de Tee's-->
+      </div>
       </div>
    
       
-      <div class="table-condensed table-striped m-0-auto p-0">
+      <div id="fancy" class="table-condensed table-striped m-0-auto p-0">
         <div class="tables-container">
-          <table id="fancy" class="table">
+          <table class="table">
             <thead id="tableHead"></thead>
             <tbody id="allNine" class="text-light"></tbody>
           </table>
         </div>
 
-        <div id="playerData"></div>  <!-- Aqui va boton de addPlayers-->
+        <div id="playerData"></div>  <!-- boton de addPlayers-->
         
-        <div id="fancy" class="tables-container">
-          <table id="fancy" class="table">
+        <div class="tables-container">
+          <table class="table">
             <tbody id="allHoles"></tbody></table>
             <table id="scoreCard" class="playerScoreTable text-center"></table>
           </div>
         </div>
   </div>
 
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>               -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>              
   <script defer src="script.js"></script>
 </body>
 </html>

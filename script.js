@@ -61,7 +61,7 @@ async function getTee(courseData) {
 async function teeSelect(e) {
   let color = e.value
   const teeTitle = document.getElementById('tee-title');
-  teeTitle.innerHTML = "Tee Box: " + color;
+  teeTitle.innerHTML = "Playing with tee color: " + color;
 
   let course;
   let teeType = []
@@ -98,17 +98,14 @@ async function showScoreCard(teeType) {
   let yardSum2 = 0;
   let parSum2 = 0;
   let hcpSum2 = 0;
-  let totalyards = yardSum + yardSum2;
-  let totalpar = parSum + parSum2;
-  let totalhcp = hcpSum + hcpSum2;
 
   try {
   } catch (error) {
     console.log(`ERROR: ${error}`);
   }
 
-console.log(teeType)
-for (let i = 0; i < teeType.length; i++) {
+  console.log(teeType);
+  for (let i = 0; i < teeType.length; i++) {
     if (i < 9) {
       body += `<td>${teeType[i].teeBoxYards}</td>`;
       parBody += `<td>${teeType[i].teeBoxPar}</td>`;
@@ -116,16 +113,19 @@ for (let i = 0; i < teeType.length; i++) {
       yardSum += teeType[i].teeBoxYards;
       parSum += teeType[i].teeBoxPar;
       hcpSum += teeType[i].teeBoxHcp;
+    } else {
+      body2 += `<td>${teeType[i].teeBoxYards}</td>`;
+      parBody2 += `<td>${teeType[i].teeBoxPar}</td>`;
+      hcpBody2 += `<td>${teeType[i].teeBoxHcp}</td>`;
+      yardSum2 += teeType[i].teeBoxYards;
+      parSum2 += teeType[i].teeBoxPar;
+      hcpSum2 += teeType[i].teeBoxHcp;
     }
-      else {
-        body2 += `<td>${teeType[i].teeBoxYards}</td>`;
-        parBody2 += `<td>${teeType[i].teeBoxPar}</td>`;
-        hcpBody2 += `<td>${teeType[i].teeBoxHcp}</td>`;
-        yardSum2 += teeType[i].teeBoxYards;
-        parSum2 += teeType[i].teeBoxPar;
-        hcpSum2 += teeType[i].teeBoxHcp;
-      }
-  };
+  }
+
+  let totalyards = yardSum + yardSum2;
+  let totalpar = parSum + parSum2;
+  let totalhcp = hcpSum + hcpSum2;
 
   body2 += `<th>${yardSum2}</th>`;
   parBody2 += `<th>${parSum2}</th>`;
@@ -145,6 +145,8 @@ for (let i = 0; i < teeType.length; i++) {
 
   createButtonAddPlayers();
 }
+
+
 
 //button to addplayers table
 function createButtonAddPlayers() {
@@ -168,7 +170,7 @@ for (let i = 1; i <= 4; i++) {
   const nameInput = document.createElement('input');
   nameInput.type = 'text';
   nameInput.id = `playerName${i}`;
-  nameInput.placeholder = `Player${i}`;
+  nameInput.placeholder = `Name`;
   nameCell.appendChild(nameInput);
   row.appendChild(nameCell);
 
@@ -252,7 +254,7 @@ for(let x=0; x<=3; x++){
   const nameInput = document.createElement('input');
   nameInput.type = 'text';
   nameInput.id = `playerName`;
-  nameInput.placeholder = `Player`;
+  nameInput.placeholder = `Name`;
   td.appendChild(nameInput);
   row.appendChild(td);
 
@@ -280,44 +282,7 @@ for(let x=0; x<=3; x++){
     row.appendChild(td)
     allNine.appendChild(row)
   }
-
-
-
-/* table.innerHTML = '<thead><th>Name</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>Out</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>In</th><th>Total</th></thead>';
-table.appendChild(tbody);
-document.getElementById('scoreCard').appendChild(table); */
 }
-
-
-
-/*
-//analizar score registro
-function golfScore(pars, hits) {
-if (hits == 1) {
-  return "Hole-in-one";
-} else if (hits <= pars - 2) {
-  return "Eagle";
-} else if (hits == pars - 1) {
-  return "Birdie";
-} else if (hits == pars) {
-  return "Par";
-} else if (hits == pars + 1) {
-  return "Bogey";
-} else if (hits == pars + 2) {
-  return "Double Bogey";
-} else if (hits >= pars + 3) {
-  return "Go Home!";
-}
-}
-console.log(golfScore(4, 15));
-
-
-
-/*  
-//notification toastr 
-toastr.success(`${playerName}, you are (L)PGA Tour material`);
-*/
-
 
 document.addEventListener('DOMContentLoaded', ()=>{
   loadCourse()
