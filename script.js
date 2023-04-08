@@ -162,126 +162,115 @@ addplayer.style.display = "none";
 const addPlayers = () => {
 const table = document.createElement('table');
 const tbody = document.createElement('tbody');
-let contadorGolpes = 1;
+let contador = 1;
+let totalInput = 0;
 
-for (let i = 1; i <= 4; i++) {
-  const row = document.createElement('tr');
-  const nameCell = document.createElement('th');
-  const nameInput = document.createElement('input');
-  nameInput.type = 'text';
-  nameInput.id = `playerName${i}`;
-  nameInput.placeholder = `Name${i}`;
-  nameCell.appendChild(nameInput);
-  row.appendChild(nameCell);
-
-  let totalOut = 0;
-  let totalIn = 0;
-
-  for (let j = 1; j <= 18; j++) {
-    const cell = document.createElement(j % 10 === 0 ? 'th' : 'td');
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.id = `golpe${contadorGolpes}`;
-    contadorGolpes++;
-
-    input.addEventListener('change', () => {
-      const value = parseInt(input.value) || 0;
-      if (j <= 9) {
-        totalOut += value;
-      } else {
-        totalIn += value;
-      }     
-      row.childNodes[10].textContent = totalOut;
-      row.childNodes[20].textContent = totalIn;
-      row.childNodes[21].textContent = totalOut + totalIn;
-    });
-
-
-    cell.appendChild(input);
-    row.appendChild(cell);
-  }
-
-  const inCell = document.createElement('td');
-  const totalOutCell = document.createElement('td');
-  const totalInCell = document.createElement('td');
-  const totalCell = document.createElement('td');
-  row.appendChild(inCell);
-  row.appendChild(totalOutCell);
-  row.appendChild(totalInCell);
-  row.appendChild(totalCell);
-  tbody.appendChild(row);
-}
-//Encabezados--------------------------------------------------
-
-
+//Encabezados---------------------------------------
 const allNine = document.getElementById('allNine')
+
+//abre tr y agrega el encabezado NAME
 let tr = document.createElement('tr')
 let th = document.createElement('th')
 th.textContent= 'Name'
 tr.appendChild(th)
 
+//agrega los hoyos 1-9 y el encabezado OUT
 for(let i= 1; i<=9; i++){
   let th = document.createElement('th')
   th.textContent= i
   tr.appendChild(th)
 }
-
-
 th = document.createElement('th')
 th.textContent= 'Out'
 tr.appendChild(th)
+
+//agrega los hoyos 10-18 y el encabezado IN y TOTAL
 for(let i= 10; i<=18; i++){
   let th = document.createElement('th')
   th.textContent= i
   tr.appendChild(th)
 }
-
 th = document.createElement('th')
 th.textContent= 'In'
 tr.appendChild(th)
-
 th = document.createElement('th')
 th.textContent= 'Total'
 tr.appendChild(th)
 
 allNine.appendChild(tr)
-//Fin de encabezados
+//Fin de encabezados--------------------------------
 
 
-for(let x=0; x<=3; x++){
+  for (let x = 0; x <= 3; x++) {
+    let row = document.createElement('tr')
+    let td = document.createElement('td');
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.id = `playerName`;
+    nameInput.placeholder = `Name`;
+    td.appendChild(nameInput);
+    row.appendChild(td);
 
-  let row = document.createElement('tr')
-  let td = document.createElement('td');
-  const nameInput = document.createElement('input');
-  nameInput.type = 'text';
-  nameInput.id = `playerName`;
-  nameInput.placeholder = `Name`;
-  td.appendChild(nameInput);
-  row.appendChild(td);
+    let frontInputs = [];
+    let backInputs = [];
 
-  for(let i= 1; i<=9; i++){
-    let td = document.createElement('td')
-    const input = document.createElement('input');
-    input.type = 'number'; 
-    td.appendChild(input)
-    row.appendChild(td)
-  }
+    for (let i = 1; i <= 9; i++) {
+      let td = document.createElement('td')
+      const frontInput = document.createElement('input');
+      frontInput.type = 'number';
+      frontInput.addEventListener('change', sumarFila);
+      frontInputs.push(frontInput);
+      td.appendChild(frontInput)
+      row.appendChild(td)
+    }
 
-  td = document.createElement('td')
-  row.appendChild(td)
-
-  for(let i= 1; i<=9; i++){
-    let td = document.createElement('td')
-    const input = document.createElement('input');
-    input.type = 'number'; 
-    td.appendChild(input)
-    row.appendChild(td)
-  }
     td = document.createElement('td')
+    td.id = `my_out`;
     row.appendChild(td)
+    td.innerHTML = 0;
+
+    for (let i = 1; i <= 9; i++) {
+      let td = document.createElement('td')
+      const backInput = document.createElement('input');
+      backInput.type = 'number';
+      backInput.addEventListener('change', sumarFila);
+      backInputs.push(backInput);
+      td.appendChild(backInput)
+      row.appendChild(td)
+    }
+
     td = document.createElement('td')
+    td.id = `my_in`;
     row.appendChild(td)
+    td.innerHTML = 0;
+
+    td = document.createElement('td')
+    td.id = `my_total`;
+    row.appendChild(td)
+    td.innerHTML = 0;
+
     allNine.appendChild(row)
+
+    // sumar valores x fila y actualiza el total
+    function sumarFila() {
+      let totalOut = 0;
+      let totalIn = 0;
+      let totalInput = 0;
+      for (let i = 0; i < frontInputs.length; i++) {
+        totalOut += Number(frontInputs[i].value);
+      }
+      for (let i = 0; i < backInputs.length; i++) {
+        totalIn += Number(backInputs[i].value);
+      }
+      td = row.querySelector('#my_out');
+      td.innerHTML = totalOut;
+
+      td = row.querySelector('#my_in');
+      td.innerHTML = totalIn;
+
+      td = row.querySelector('#my_total');
+      td.innerHTML = totalOut + totalIn;
+    }
   }
 }
 
