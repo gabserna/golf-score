@@ -160,119 +160,188 @@ addplayer.style.display = "none";
 
 //addplayers table
 const addPlayers = () => {
-const table = document.createElement('table');
-const tbody = document.createElement('tbody');
-let contador = 1;
-let totalInput = 0;
+  const table = document.createElement('table');
+  const tbody = document.createElement('tbody');
 
-//Encabezados---------------------------------------
-const allNine = document.getElementById('allNine')
+  // Encabezados
+  const allNine = document.getElementById('allNine');
+  let tr = document.createElement('tr');
+  let th = document.createElement('th');
+  th.textContent= 'Name';
+  tr.appendChild(th);
 
-//abre tr y agrega el encabezado NAME
-let tr = document.createElement('tr')
-let th = document.createElement('th')
-th.textContent= 'Name'
-tr.appendChild(th)
-
-//agrega los hoyos 1-9 y el encabezado OUT
-for(let i= 1; i<=9; i++){
-  let th = document.createElement('th')
-  th.textContent= i
-  tr.appendChild(th)
-}
-th = document.createElement('th')
-th.textContent= 'Out'
-tr.appendChild(th)
-
-//agrega los hoyos 10-18 y el encabezado IN y TOTAL
-for(let i= 10; i<=18; i++){
-  let th = document.createElement('th')
-  th.textContent= i
-  tr.appendChild(th)
-}
-th = document.createElement('th')
-th.textContent= 'In'
-tr.appendChild(th)
-th = document.createElement('th')
-th.textContent= 'Total'
-tr.appendChild(th)
-
-allNine.appendChild(tr)
-//Fin de encabezados--------------------------------
-
-
-  for (let x = 0; x <= 3; x++) {
-    let row = document.createElement('tr')
-    let td = document.createElement('td');
-    const nameInput = document.createElement('input');
-    nameInput.type = 'text';
-    nameInput.id = `playerName`;
-    nameInput.placeholder = `Name`;
-    td.appendChild(nameInput);
-    row.appendChild(td);
-
-    let frontInputs = [];
-    let backInputs = [];
-
-    for (let i = 1; i <= 9; i++) {
-      let td = document.createElement('td')
-      const frontInput = document.createElement('input');
-      frontInput.type = 'number';
-      frontInput.addEventListener('change', sumarFila);
-      frontInputs.push(frontInput);
-      td.appendChild(frontInput)
-      row.appendChild(td)
-    }
-
-    td = document.createElement('td')
-    td.id = `my_out`;
-    row.appendChild(td)
-    td.innerHTML = 0;
-
-    for (let i = 1; i <= 9; i++) {
-      let td = document.createElement('td')
-      const backInput = document.createElement('input');
-      backInput.type = 'number';
-      backInput.addEventListener('change', sumarFila);
-      backInputs.push(backInput);
-      td.appendChild(backInput)
-      row.appendChild(td)
-    }
-
-    td = document.createElement('td')
-    td.id = `my_in`;
-    row.appendChild(td)
-    td.innerHTML = 0;
-
-    td = document.createElement('td')
-    td.id = `my_total`;
-    row.appendChild(td)
-    td.innerHTML = 0;
-
-    allNine.appendChild(row)
-
-    // sumar valores x fila y actualiza el total
-    function sumarFila() {
-      let totalOut = 0;
-      let totalIn = 0;
-      let totalInput = 0;
-      for (let i = 0; i < frontInputs.length; i++) {
-        totalOut += Number(frontInputs[i].value);
-      }
-      for (let i = 0; i < backInputs.length; i++) {
-        totalIn += Number(backInputs[i].value);
-      }
-      td = row.querySelector('#my_out');
-      td.innerHTML = totalOut;
-
-      td = row.querySelector('#my_in');
-      td.innerHTML = totalIn;
-
-      td = row.querySelector('#my_total');
-      td.innerHTML = totalOut + totalIn;
-    }
+  for(let i = 1; i <= 9; i++){
+    let th = document.createElement('th');
+    th.textContent = i;
+    tr.appendChild(th);
   }
+  th = document.createElement('th');
+  th.textContent = 'Out';
+  tr.appendChild(th);
+
+  for(let i = 10; i <= 18; i++){
+    let th = document.createElement('th');
+    th.textContent = i;
+    tr.appendChild(th);
+  }
+  th = document.createElement('th');
+  th.textContent = 'In';
+  tr.appendChild(th);
+  th = document.createElement('th');
+  th.textContent = 'Total';
+  tr.appendChild(th);
+  allNine.appendChild(tr);
+
+  // Jugadores
+  let lowestScorePlayer = null;
+for (let x = 0; x <= 3; x++) {
+  let row = document.createElement('tr');
+  let td = document.createElement('td');
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.id = `playerName${x}`;
+  nameInput.placeholder = `Name`;
+  td.appendChild(nameInput);
+  row.appendChild(td);
+
+  let frontInputs = [];
+  let backInputs = [];
+
+  for (let i = 1; i <= 9; i++) {
+    let td = document.createElement('td');
+    const frontInput = document.createElement('input');
+    frontInput.type = 'number';
+    frontInput.addEventListener('change', sumarFila);
+    frontInputs.push(frontInput);
+    td.appendChild(frontInput);
+    row.appendChild(td);
+  }
+
+  td = document.createElement('td');
+  td.id = `my_out${x}`;
+  row.appendChild(td);
+  td.innerHTML = 0;
+
+  for (let i = 1; i <= 9; i++) {
+    let td = document.createElement('td');
+    const backInput = document.createElement('input');
+    backInput.type = 'number';
+    backInput.addEventListener('change', sumarFila);
+    backInputs.push(backInput);
+    td.appendChild(backInput);
+    row.appendChild(td);
+  }
+
+  td = document.createElement('td');
+  td.id = `my_in${x}`;
+  row.appendChild(td);
+  td.innerHTML = 0;
+
+  td = document.createElement('td');
+  td.id = `my_total${x}`;
+  row.appendChild(td);
+  td.innerHTML = 0;
+
+  allNine.appendChild(row);
+
+  // sumar valores x fila y actualiza el total
+  function sumarFila() {
+    let totalOut = 0;
+    let totalIn = 0;
+    for (let i = 0; i < frontInputs.length; i++) {
+      totalOut += Number(frontInputs[i].value);
+    }
+    for (let i = 0; i < backInputs.length; i++) {
+      totalIn += Number(backInputs[i].value);
+    }
+
+    td = document.getElementById(`my_out${x}`);
+    td.innerHTML = totalOut;
+
+    td = document.getElementById(`my_in${x}`);
+    td.innerHTML = totalIn;
+
+    td = document.getElementById(`my_total${x}`);
+    td.innerHTML = totalOut + totalIn;
+  }
+
+  // Obtener los totales de los jugadores después de ingresar todos los valores
+  //button to addplayers table
+  const boton = document.getElementById('calculateWinner');
+  boton.addEventListener('click', () => obtenerTotalesJugadores(x));
+
+
+
+
+  function obtenerTotalesJugadores() {
+    console.log("Starting obtenerTotalesJugadores function...");
+  
+    const players = document.querySelectorAll('tr:not(:first-child)');
+    console.log("Found players:", players);
+  
+    let lowestScorePlayerIndex = Infinity;
+    let lowestScore = Infinity;
+  
+    players.forEach((player, index) => {
+      const playerNameInput = player.querySelector(`#playerName${index}`);
+      if (!playerNameInput) {
+        return; // skip if input element not found for player
+      }
+      
+      let total = 0;
+  
+      for (let i = 1; i <= 9; i++) {
+        const frontInput = player.querySelector(`#player${index}-front${i}`);
+        const backInput = player.querySelector(`#player${index}-back${i}`);
+        if (frontInput.value) {
+          total += Number(frontInput.value);
+        }
+        if (backInput.value) {
+          total += Number(backInput.value);
+        }
+      }
+  
+      const playerName = playerNameInput.value;
+      console.log("playerName:", playerName);
+  
+      console.log("total:", total);
+      console.log("lowestScore:", lowestScore);
+  
+      if (total < lowestScore) {
+        lowestScorePlayerIndex = index;
+        lowestScore = total;
+      }
+    });
+  
+    console.log("Lowest score:", lowestScore);
+    console.log("Lowest player index:", lowestScorePlayerIndex);
+  
+    if (lowestScorePlayerIndex !== Infinity) {
+      const lowestScorePlayerName = document.querySelector(`#playerName${lowestScorePlayerIndex}`).value;
+      console.log("Lowest player name:", lowestScorePlayerName);
+  
+      // Generate alert with the player with the lowest score
+      alert(`The player with the lowest score is: ${lowestScorePlayerName}`);
+    } else {
+      alert("No players found");
+    }
 }
+
+  
+  
+  
+  
+
+
+
+
+    
+
+    
+  }
+
+}
+
 
 document.addEventListener('DOMContentLoaded', ()=>{
   loadCourse()
