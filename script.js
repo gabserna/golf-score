@@ -313,16 +313,17 @@ for (let x = 0; x <= 3; x++) {
       }
     });
   
-    console.log("Lowest score:", lowestScore);
-    console.log("Lowest player index:", lowestScorePlayerIndex);
+    //console.log("Lowest score:", lowestScore);
+    //console.log("Lowest player index:", lowestScorePlayerIndex);
   
     if (lowestScorePlayerIndex !== Infinity) {
       const lowestScorePlayerName = document.querySelector(`#playerName${lowestScorePlayerIndex}`).value;
-      console.log("Lowest player name:", lowestScorePlayerName);
-  
-      // Generate alert with the player with the lowest score
+      //console.log("Lowest player name:", lowestScorePlayerName);
+      //toastr.success(`The player with the lowest score is: ${lowestScorePlayerName}`, 'Lowest Score Player');
       alert(`The player with the lowest score is: ${lowestScorePlayerName}`);
     } else {
+      //toastr.success('never worked', 'failed to work');
+      //toastr["warning"]("No players found...!");
       alert("No players found");
     }
 }
@@ -341,6 +342,8 @@ for (let x = 0; x <= 3; x++) {
   }
 
 }
+
+
 
 
 document.addEventListener('DOMContentLoaded', ()=>{
