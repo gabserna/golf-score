@@ -263,17 +263,13 @@ for (let x = 0; x <= 3; x++) {
 
     td = document.getElementById(`my_total${x}`);
     td.innerHTML = totalOut + totalIn;
+
   }
+  document.getElementById('calculateWinner').style.display = "initial";
+}
+}
 
-  // Obtener los totales de los jugadores después de ingresar todos los valores
-  //button to addplayers table
-  const boton = document.getElementById('calculateWinner');
-  boton.addEventListener('click', () => obtenerTotalesJugadores(x));
-
-
-
-
-  function obtenerTotalesJugadores() {
+function obtenerTotalesJugadores() {
     console.log("Starting obtenerTotalesJugadores function...");
   
     const players = document.querySelectorAll('tr:not(:first-child)');
@@ -327,24 +323,6 @@ for (let x = 0; x <= 3; x++) {
       alert("No players found");
     }
 }
-
-  
-  
-  
-  
-
-
-
-
-    
-
-    
-  }
-
-}
-
-
-
 
 document.addEventListener('DOMContentLoaded', ()=>{
   loadCourse()

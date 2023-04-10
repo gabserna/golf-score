@@ -98,7 +98,7 @@ body {
   justify-content: left;
 }
 
-#addplayer, #reset {
+#addplayer, #reset, #calculateWinner {
   width: 7em;
   height: 1.5em;
   background-color: #d4d700;
@@ -107,6 +107,10 @@ body {
   border-radius: 10px;
   border: none;
   cursor: pointer;
+}
+
+#calculateWinner {
+  display: none;
 }
 
 #subtitler {
