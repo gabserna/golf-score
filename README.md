@@ -1,13 +1,14 @@
-2.P.2 | Golf Score App - Step-by-step guide
-Project Overview
+# 2.P.2 | Golf Score App - Step-by-step guide
+
+- Project Overview
 This project is meant to provide students the opportunity to demonstrate and practice what they have learned by creating a simple Golf Scorecard. The score card will have all the functionality that a golfer would need such as yardage per hole, par per hole, be able to select the tees wanted etc.
 
 We will be using  API url endpoints to get golf course information. Documentation and a JSON example of course info: 
 
-Golf Courses
+- Golf Courses
 https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/courses.jsonLinks to an external site.
 
-Golf Score Course ID 
+- Golf Score Course ID 
 Course ID: 11819 - Thanksgiving Point Golf Course - Lehi, UT | https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/course11819.jsonLinks to an external site. | GitHub: golf-course_id11819Links to an external site.
 Course ID: 18300 - Fox Hollow Golf Course - American Fork, UT | https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/course18300.jsonLinks to an external site. | GitHub: golf-course_id18300Links to an external site.
 Course ID: 19002 - Spanish Oaks Golf Course - Spanish Fork, UT | https://exquisite-pastelito-9d4dd1.netlify.app/golfapi/course19002.jsonLinks to an external site.Links to an external site. | GitHub: golf-course_id19002Links to an external site.
